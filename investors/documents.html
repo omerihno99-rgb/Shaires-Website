@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- disclaimer gate: send unacked visitors back to index for the modal -->
+<script>
+(function(){
+  try { if (sessionStorage.getItem('shaires-disclaimer-accepted-v1') === '1') return; } catch(e){}
+  var ret = encodeURIComponent(location.pathname + location.search + location.hash);
+  location.replace('../index.html#disclaimer-return=' + ret);
+})();
+</script>
+<title>Documents — shaires</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="_page.css" />
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../index.html">sh<em>ai</em>res.</a>
+    <div class="nav-links">
+      <a href="../index.html#thesis">Thesis</a>
+      <a href="../index.html#positioning">Positioning</a>
+      <a href="../index.html#portfolio">Portfolio</a>
+      <a href="../index.html#structure">Structure</a>
+      <a href="../index.html#team">Team</a>
+      <a href="../index.html#governance">Governance</a>
+      <a href="../index.html#investors">Investors</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+    <a href="../index.html#contact" class="ihb sm">
+      <span class="ihb-idle">
+        <span class="ihb-dot"></span>
+        <span class="ihb-text">Request access</span>
+      </span>
+      <span class="ihb-hover">
+        <span>Request access</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </span>
+    </a>
+  </div>
+</nav>
+
+<main class="ip-page">
+  <div class="wrap">
+        <div class="ip-back-row">
+      <a href="../index.html#investors" class="ihb sm ihb-back">
+        <span class="ihb-idle">
+          <svg class="ihb-back-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span>Back to Investors</span>
+        </span>
+        <span class="ihb-hover">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span>Back to Investors</span>
+        </span>
+      </a>
+      <nav class="ip-pagenav" aria-label="Page navigation"><a class="ip-pagenav-link prev" href="advisors.html"><svg class="ip-pagenav-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span class="ip-pagenav-title">Advisors</span></a><a class="ip-pagenav-link next" href="valuation-policy.html"><span class="ip-pagenav-title">Valuation Policy</span><svg class="ip-pagenav-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></nav>
+    </div>
+    <p class="ip-eyebrow">Investors / 07</p>
+    <h1 class="ip-title"><em>Documents.</em></h1>
+    <p class="ip-lede">Key corporate documents, shareholder communications, circulars, notices of meeting, and admission documents. Click any row to open the PDF in a new tab.</p>
+
+    <table class="ip-doctable">
+      <colgroup>
+        <col class="col-date" />
+        <col />
+        <col class="col-action" />
+      </colgroup>
+      <thead>
+        <tr><th>Date</th><th>Document</th><th class="doc-action">Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="doc-date">16/01/2026</td><td class="doc-title">Amended and Restated Memorandum of Association (2026 GM)</td><td class="doc-action"><a href="docs/memorandum-2026-gm.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">22/12/2025</td><td class="doc-title">shaires — 2026 GM Circular (Zeus)</td><td class="doc-action"><a href="docs/2026-gm-circular-zeus.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">13/10/2025</td><td class="doc-title">shaires — Circular and Notice of General Meeting (NOIA Subscription)</td><td class="doc-action"><a href="docs/2025-gm-noia-subscription.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">13/10/2025</td><td class="doc-title">Blank Form of Proxy — October 2025</td><td class="doc-action"><a href="docs/proxy-form-october-2025.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">20/03/2025</td><td class="doc-title">Blank Form of Proxy</td><td class="doc-action"><a href="docs/proxy-form-march-2025.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">19/03/2025</td><td class="doc-title">shaires — 2024 AGM Circular</td><td class="doc-action"><a href="docs/2024-agm-circular.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">11/04/2024</td><td class="doc-title">Proposed Disposal of Legacy Assets &amp; Restructuring Circular</td><td class="doc-action"><a href="docs/2024-disposal-restructuring-circular.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">15/05/2023</td><td class="doc-title">Q1 HFRF Fixed Return SubClasses</td><td class="doc-action"><a href="docs/2023-q1-hfrf-fixed-return.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">04/05/2023</td><td class="doc-title">Notice of 2022 Annual General Meeting</td><td class="doc-action"><a href="docs/notice-agm-2022.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">03/05/2023</td><td class="doc-title">Blank Form of Proxy</td><td class="doc-action"><a href="docs/proxy-form-may-2023.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">26/02/2023</td><td class="doc-title">2023 Amended and Restated Memorandum of Association and Articles of Association</td><td class="doc-action"><a href="docs/memorandum-2023.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">23/02/2023</td><td class="doc-title">2023 General Meeting Voting Results</td><td class="doc-action"><a href="docs/2023-gm-voting-results.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">31/01/2023</td><td class="doc-title">Circular and Notice of General Meeting</td><td class="doc-action"><a href="docs/2023-gm-circular-notice.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">14/09/2021</td><td class="doc-title">2021 AGM Voting Results</td><td class="doc-action"><a href="docs/2021-agm-voting-results.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">12/08/2021</td><td class="doc-title">Notice of Annual General Meeting 2021</td><td class="doc-action"><a href="docs/notice-agm-2021.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">21/01/2021</td><td class="doc-title">Key Information Document</td><td class="doc-action"><a href="docs/key-information-document-2021.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">18/01/2021</td><td class="doc-title">Amended and Restated Memorandum of Association and Articles of Association</td><td class="doc-action"><a href="docs/memorandum-2021.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">22/07/2020</td><td class="doc-title">Notice of Annual General Meeting 2020</td><td class="doc-action"><a href="docs/notice-agm-2020.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">22/07/2020</td><td class="doc-title">Notice of Annual General Meeting 2019</td><td class="doc-action"><a href="docs/notice-agm-2019.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">17/07/2020</td><td class="doc-title">Open Offer, Placing and Notice of GM</td><td class="doc-action"><a href="docs/2020-open-offer-placing-notice.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">17/07/2020</td><td class="doc-title">Open Offer Application Form</td><td class="doc-action"><a href="docs/2020-open-offer-application.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">17/07/2020</td><td class="doc-title">Notice of General Meeting 2020</td><td class="doc-action"><a href="docs/notice-gm-2020.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">20/05/2020</td><td class="doc-title">Company Presentation May 2020</td><td class="doc-action"><span class="doc-action muted">Available on request</span></td></tr>
+        <tr><td class="doc-date">14/11/2019</td><td class="doc-title">Rescheduled Annual General Meeting 2019</td><td class="doc-action"><a href="docs/2019-rescheduled-agm-november.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">18/07/2019</td><td class="doc-title">Rescheduled Annual General Meeting 2019</td><td class="doc-action"><a href="docs/2019-rescheduled-agm-july.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">25/06/2019</td><td class="doc-title">Key Information Document</td><td class="doc-action"><a href="docs/key-information-document-2021.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">23/07/2018</td><td class="doc-title">Notice of Annual General Meeting 2018</td><td class="doc-action"><a href="docs/notice-agm-2018.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">05/04/2018</td><td class="doc-title">Proposed Disposal of Certain Assets and Notice of General Meeting</td><td class="doc-action"><a href="docs/2018-disposal-notice.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">25/05/2017</td><td class="doc-title">New Investment Strategy and Change of Investment Manager</td><td class="doc-action"><a href="docs/2017-new-investment-strategy.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">17/02/2014</td><td class="doc-title">Memorandum of Association and Articles of Association</td><td class="doc-action"><a href="docs/memorandum-2014.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">29/01/2014</td><td class="doc-title">Admission Document dated 30 January 2014</td><td class="doc-action"><a href="docs/admission-document-2014.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+        <tr><td class="doc-date">29/09/2009</td><td class="doc-title">Admission Document dated 30 September 2009</td><td class="doc-action"><a href="docs/admission-document-2009.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+      </tbody>
+    </table>
+
+    <p class="ip-foot">Documents are published on this page as they become available and are also announced via RNS where required. Older items marked &ldquo;Available on request&rdquo; can be obtained by contacting the Company Secretary.</p>
+  </div>
+</main>
+
+<footer class="ip-footer">
+  <div class="wrap ip-footer-inner">
+    <span>© <span id="year"></span> shaires. All rights reserved.</span>
+  </div>
+</footer>
+<script>
+  // Frost the top nav once the user has scrolled
+  (function(){
+    const nav = document.querySelector('nav.top');
+    if (!nav) return;
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+  })();
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
