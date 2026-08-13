@@ -4050,8 +4050,19 @@
   .film-frame.is-playing:not(.is-paused) .film-ctrl .i-play{ display:none }
   .film-frame.is-playing:not(.is-paused) .film-ctrl .i-pause{ display:block }
 
+  [hidden]{display:none !important}
+
   .faq-a-inner ul{ margin:10px 0 0; padding-left:18px }
   .faq-a-inner li{ margin:0 0 6px }
+
+  .film-doc{
+    display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+    color:var(--ink); text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:border-color var(--t-base) var(--ease);
+  }
+  .film-doc svg{ width:13px; height:13px; stroke-width:1.6 }
+  .film-doc:hover{ border-bottom-color:var(--accent) }
 
   .film-foot{
     margin:20px 0 0; text-align:center; max-width:56ch;
@@ -4101,7 +4112,7 @@
       <span class="film-runtime" id="filmRuntime"></span>
     </div>
 
-    <p class="film-foot film-reveal">Pure exposure to the AI supercycle. The thinking behind Shaires, in just over five minutes.</p>
+    <p class="film-foot film-reveal">Pure exposure to the AI supercycle. The thinking behind Shaires, in just over five minutes.<br><a class="film-doc" href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">Read the retail investor factsheet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></p>
   </div>
 </section>
 
@@ -5111,6 +5122,7 @@
  <tr><th>Date</th><th>Document</th><th class="doc-action">Action</th></tr>
  </thead>
  <tbody>
+ <tr class="doc-gated" hidden><td class="doc-date">12/08/2026</td><td class="doc-title">Shaires &mdash; Retail Investor Factsheet</td><td class="doc-action"><a href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
  <tr><td class="doc-date">30/07/2026</td><td class="doc-title">Shaires &mdash; First Tranche Institutional Fundraise for US$28.5m (RNS)</td><td class="doc-action"><a href="investors/docs/2026-first-tranche-institutional-fundraise.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
  <tr><td class="doc-date">13/07/2026</td><td class="doc-title">Shaires, Appointment of Directors and Senior Management (RNS)</td><td class="doc-action"><a href="investors/docs/2026-appointment-directors-senior-management.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
  <tr><td class="doc-date">22/05/2026</td><td class="doc-title">Shaires, Circular re New Investing Policy &amp; Share Combination</td><td class="doc-action"><a href="investors/docs/2026-new-investing-policy-circular.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
@@ -7604,5 +7616,29 @@ function shairesInitHero(){
   });
 })();
 </script>
+
+<!-- Factsheet row is embargoed with the overview film: visible via the preview
+     link, and published automatically at 07:00 BST on 13 Aug 2026. Runs at the
+     end of the document so the Documents table already exists. -->
+<script>
+(function(){
+  var GO_LIVE = Date.parse('2026-08-13T06:00:00Z');
+  var KEY = 'cav81dllxremeq';
+  function unlocked(){
+    try{
+      var q = new URLSearchParams(window.location.search);
+      if (q.get('preview') === KEY){ sessionStorage.setItem('shaires-film-preview','1'); return true; }
+      return sessionStorage.getItem('shaires-film-preview') === '1';
+    }catch(e){ return false; }
+  }
+  function show(){
+    var rows = document.querySelectorAll('.doc-gated');
+    for (var i=0;i<rows.length;i++) rows[i].hidden = false;
+  }
+  if (Date.now() >= GO_LIVE || unlocked()) show();
+  else { var w = GO_LIVE - Date.now(); if (w > 0 && w < 86400000) setTimeout(show, w); }
+})();
+</script>
+
 </body>
 </html>
