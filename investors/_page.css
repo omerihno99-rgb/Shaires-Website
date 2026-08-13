@@ -837,6 +837,30 @@ nav.top.scrolled .nav-links{
 .ihb-nsm:hover,
 .ihb-nsm:active{ background:var(--bg); border-color:var(--accent); color:var(--accent) }
 
+.ip-pagenav-link.next:hover .ipn-idle,
+.ip-pagenav-link.prev:hover .ipn-idle,
+.ip-pagenav-link.next:active .ipn-idle,
+.ip-pagenav-link.prev:active .ipn-idle{ transform:none; opacity:1 }
+.ihb-back::before{ display:none }
+.ihb-back:hover .ihb-idle,
+.ihb-back:active .ihb-idle{ transform:none; opacity:1; color:var(--bg) }
+@media (hover:none){
+  /* Request access: static button on touch — no slide layers, instant flat
+     press (black fill, cream text), matching the pill buttons. */
+  .nav-inner .ihb .ihb-hover{ display:none }
+  .nav-inner .ihb .ihb-text{ transform:none; opacity:1 }
+  .nav-inner .ihb .ihb-dot{ transform:none }
+  .nav-inner .ihb:active{
+    background:var(--ink); border-color:var(--ink); color:var(--bg);
+    transform:none;
+    transition:background .12s ease, color .12s ease, border-color .12s ease;
+  }
+  .nav-inner .ihb:active .ihb-idle{ color:var(--bg) }
+  .nav-inner .ihb:active .ihb-text{ color:var(--bg); background:transparent }
+  .nav-inner .ihb:active .ihb-dot{ background:var(--accent) }
+}
+
+
 /* Arrow-only downloads through tablet widths */
 @media (max-width:900px){
   .ip-doctable .doc-action a{ font-size:0; gap:0 }
