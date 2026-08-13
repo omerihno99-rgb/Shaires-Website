@@ -581,6 +581,46 @@
     .sec-label{ font-size:11px; letter-spacing:.18em }
   }
 
+
+  /* ---------- Hero scroll cue (desktop only) ---------- */
+  .hero-cue{ display:none }
+  @media (min-width:901px){
+    /* the nav already has Request access — keep the hero uncluttered */
+    .hero .hero-row{ display:none }
+    .hero-cue{
+      display:flex; flex-direction:column; align-items:center; gap:12px;
+      margin-top:44px;
+      animation: heroIn 700ms var(--ease) 420ms both;
+    }
+    .hero-cue-line{
+      position:relative; display:block; width:1px; height:54px;
+      background:linear-gradient(to bottom, transparent, var(--line) 18%, var(--line) 82%, transparent);
+      overflow:hidden;
+    }
+    .hero-cue-line i{
+      position:absolute; left:0; top:0; width:1px; height:18px;
+      background:linear-gradient(to bottom, transparent, var(--accent), transparent);
+      animation: cueTravel 2.6s var(--ease) infinite;
+    }
+    @keyframes cueTravel{
+      0%   { transform:translateY(-18px); opacity:0 }
+      22%  { opacity:.85 }
+      78%  { opacity:.85 }
+      100% { transform:translateY(54px);  opacity:0 }
+    }
+    .hero-cue-text{
+      font-family:'JetBrains Mono',monospace; font-size:11px;
+      letter-spacing:.22em; text-transform:uppercase; color:var(--muted);
+      opacity:.75;
+    }
+    /* fade the cue away once the visitor has started scrolling */
+    body.has-scrolled .hero-cue{ opacity:0; transition:opacity 400ms var(--ease) }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-cue{ animation:none }
+    .hero-cue-line i{ animation:none; opacity:.5; top:18px }
+  }
+
   /* ---------- Two baskets ---------- */
   .baskets{display:grid; grid-template-columns:1fr 1fr; gap:24px}
   .basket{
@@ -882,7 +922,7 @@
   /* ---------- Footer ---------- */
   footer{padding:40px 0 28px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
   .foot-grid{display:grid; grid-template-columns:1.7fr 1fr 1fr 1fr 1fr; gap:32px; margin-bottom:40px}
-  .foot-note{display:block; padding:6px 0; color:var(--muted)}
+  .foot-note{display:block; padding:6px 0; color:var(--ink-2)}
   @media (max-width:1080px){.foot-grid{grid-template-columns:1.6fr 1fr 1fr; row-gap:28px}}
   .foot-grid h4{font-size:12px; text-transform:uppercase; letter-spacing:.22em; color:var(--ink); margin:0 0 14px; font-family:'JetBrains Mono',monospace}
   .foot-grid a{display:block; padding:6px 0; color:var(--ink-2)}
@@ -3978,6 +4018,13 @@
           </span>
         </button>
       </div>
+
+      <!-- Desktop-only: replaces the hero button (the nav already carries one)
+           with a quiet scroll affordance. -->
+      <div class="hero-cue" aria-hidden="true">
+        <span class="hero-cue-line"><i></i></span>
+        <span class="hero-cue-text">Scroll for more</span>
+      </div>
     </div>
   </div>
 </header>
@@ -4422,7 +4469,7 @@
  <div class="wrap">
  <div class="sec-head">
  <div class="sec-label">05 — Corporate Governance</div>
- <h2 class="sec-title">Governance built for a <em>listed investing company.</em></h2>
+ <h2 class="sec-title">Governance built for a <em>quoted investing company.</em></h2>
  <p class="sec-sub">The Board has decided to apply the Quoted Companies Alliance Corporate Governance Code (the QCA Code).</p>
  </div>
 
@@ -4533,7 +4580,7 @@
  </button>
  <div class="faq-a">
  <div class="faq-a-inner">
- <p>The Board has adopted the Quoted Companies Alliance Corporate Governance Code (the QCA Code), the standard framework for AIM listed investing companies. The Board comprises Suhail Rizvi (Executive Chairman), Shervin Pishevar (Vice Chairman, Non-Executive Director) and four further Non-Executive Directors: John Croft, Christian Reyntjens, Yunus Olcer and Nicolas Vassaux (Christian Reyntjens and Yunus Olcer are considered independent). Vick Seth serves as Chief Executive Officer.</p>
+ <p>The Board has adopted the Quoted Companies Alliance Corporate Governance Code (the QCA Code), the standard framework for AIM quoted investing companies. The Board comprises Suhail Rizvi (Executive Chairman), Shervin Pishevar (Vice Chairman, Non-Executive Director) and four further Non-Executive Directors: John Croft, Christian Reyntjens, Yunus Olcer and Nicolas Vassaux (Christian Reyntjens and Yunus Olcer are considered independent). Vick Seth serves as Chief Executive Officer.</p>
  <p>Two standing committees support oversight: the Investment &amp; Valuation Committee (chaired by Christian Reyntjens) which reviews strategy, asset valuations and portfolio performance prior to every major transaction, and the Audit Committee (chaired by Yunus Olcer, with Nicolas Vassaux as a member) which scrutinises investments, financing structure, risk and internal controls. The Board meets no fewer than six times each year.</p>
  </div>
  </div>
@@ -4563,7 +4610,7 @@
  </button>
  <div class="faq-a">
  <div class="faq-a-inner">
- <p>Anyone with a brokerage account can invest. Because Shaires is a publicly listed AIM investing company rather than a private fund, there is no accreditation requirement, no minimum net worth gate, and no 10 year lockup. If your broker can route an order to AIM you can buy or sell SHR shares, from one share upwards, on any day the market is open.</p>
+ <p>Anyone with a brokerage account can invest. Because Shaires is a publicly quoted AIM investing company rather than a private fund, there is no accreditation requirement, no minimum net worth gate, and no 10 year lockup. If your broker can route an order to AIM you can buy or sell SHR shares, from one share upwards, on any day the market is open.</p>
  <p>The Company is not directed at any person outside the United Kingdom where doing so would be unlawful, and within the UK the offering is targeted at investment professionals, high net worth entities, and other "Relevant Persons" as defined in the Financial Promotion Order. Shareholders should review the Terms of Access disclaimer before proceeding.</p>
  </div>
  </div>
@@ -4586,14 +4633,14 @@
 
  <div class="faq-item">
  <button class="faq-q" type="button" aria-expanded="false">
- <span><span class="faq-num">Q6</span>Is Shaires listed?</span>
+ <span><span class="faq-num">Q6</span>Is Shaires quoted?</span>
  <span class="faq-toggle" aria-hidden="true">
  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
  </span>
  </button>
  <div class="faq-a">
  <div class="faq-a-inner">
- <p>Yes. Shaires ordinary shares trade on the AIM Market of the London Stock Exchange under the ticker <strong>SHR</strong>, in GBX. The Company is incorporated in the British Virgin Islands and is regulated as an AIM listed investing vehicle under AIM Rule 26.</p>
+ <p>Yes. Shaires ordinary shares trade on the AIM Market of the London Stock Exchange under the ticker <strong>SHR</strong>, in GBX. The Company is incorporated in the British Virgin Islands and is regulated as an AIM quoted investing vehicle under AIM Rule 26.</p>
  <p>Key instrument identifiers: ISIN <strong>VGG4S09E1392</strong>, SEDOL <strong>BWM2159</strong>, with 2,500,004 shares currently in issue and no shares held in treasury. There are no restrictions on the transfer of securities. Live and historic share price data is available through London Stock Exchange, ADVFN, Proactive Investors and Yahoo Finance, links are on the Share Price page in the Investors section.</p>
  </div>
  </div>
@@ -4608,7 +4655,7 @@
  </button>
  <div class="faq-a">
  <div class="faq-a-inner">
- <p>Shaires&rsquo; shares trade like any other listed equity. Because the wrapper is publicly listed on AIM, you can buy or sell SHR at any point during market hours through your existing broker, there are no 10 year lockups, no gating, and no notice periods. Sell sizes start at one share.</p>
+ <p>Shaires&rsquo; shares trade like any other listed equity. Because the wrapper is publicly quoted on AIM, you can buy or sell SHR at any point during market hours through your existing broker, there are no 10 year lockups, no gating, and no notice periods. Sell sizes start at one share.</p>
  <p>Beyond that, the Company has plans for tokenisation of the share class to enable 24/7 secondary trading once the regulatory framework is in place, extending the underlying liquidity profile beyond traditional exchange hours.</p>
  </div>
  </div>
@@ -4748,7 +4795,7 @@
 
  <div class="ip-body">
  <p>Shaires (SHR) is quoted on the AIM Market of the London Stock Exchange and is focused on seeking the best risk adjusted returns globally. The Company will provide financing globally, with a primary focus on mid to late stage companies in the Technology sector.</p>
- <p>We have elected to be regulated as a London AIM listed vehicle. Our common stock is publicly traded on AIM, London Stock Exchange, under the ticker symbol &ldquo;SHR&rdquo;.</p>
+ <p>We have elected to be regulated as a London AIM quoted vehicle. Our common stock is publicly traded on AIM, London Stock Exchange, under the ticker symbol &ldquo;SHR&rdquo;.</p>
  </div>
 
  <h2 class="ip-h3">Investing <em>Policy.</em></h2>
@@ -5277,21 +5324,6 @@
  <h1 class="ip-title">Regulatory <em>Announcements.</em></h1>
  <p class="ip-lede">All price sensitive and regulatory announcements are released via the Regulatory News Service (RNS) of the London Stock Exchange. RNS releases are available from 08 March 2010 and can be searched by keyword, date range, year, or announcement type.</p>
 
- <h3 class="ip-h3" style="margin-top:8px">Latest <em>announcements</em> - 2026</h3>
- <table class="ip-doctable">
-   <colgroup><col class="col-date" /><col /><col class="col-action" /></colgroup>
-   <thead><tr><th>Date</th><th>Announcement</th><th class="doc-action">Action</th></tr></thead>
-   <tbody>
-     <tr><td class="doc-date">05/08/2026</td><td class="doc-title">First Tranche Institutional Fundraise for US$28.5m</td><td class="doc-action"><a href="https://www.londonstockexchange.com/news-article/SHR/first-tranche-institutional-fundraise-for-us-28-5m/17713147" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
- <tr><td class="doc-date">13/07/2026</td><td class="doc-title">Appointment of Directors and Senior Management</td><td class="doc-action"><a href="https://www.investegate.co.uk/announcement/rns/shaires-holdings-ltd--shr/appointment-of-directors-and-senior-management/9664125" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
-<tr><td class="doc-date">08/06/2026</td><td class="doc-title">Voting Results - General Meeting</td><td class="doc-action"><a href="https://www.investegate.co.uk/announcement/rns/shaires-holdings-ltd--shr/voting-results/9606913" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
-<tr><td class="doc-date">22/05/2026</td><td class="doc-title">New Investing Policy &amp; Share Combination Circular</td><td class="doc-action"><a href="https://www.investegate.co.uk/announcement/rns/shaires-holdings-ltd--shr/new-investing-policy-share-combination-circular/9583079" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
-<tr><td class="doc-date">28/04/2026</td><td class="doc-title">Final Results - Year Ended 31 December 2025</td><td class="doc-action"><a href="https://www.investegate.co.uk/announcement/rns/shaires-holdings-ltd--shr/final-results/9540480" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
-<tr><td class="doc-date">19/03/2026</td><td class="doc-title">Appointments &amp; Resignations of Non-Executive Directors</td><td class="doc-action"><a href="https://www.investegate.co.uk/announcement/rns/shaires-holdings-ltd--shr/appointments-resignations-of-non-exec-directors/9481455" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
-<tr><td class="doc-date">09/02/2026</td><td class="doc-title">Equity Subscription and Restoration of Trading</td><td class="doc-action"><a href="https://www.investegate.co.uk/announcement/rns/shaires-holdings-ltd--shr/equity-subscription-and-restoration-of-trading/9421492" target="_blank" rel="noopener">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
-   </tbody>
- </table>
-
  <div class="ip-rns-embed">
  <iframe
           src="https://tools.eurolandir.com/tools/pressreleases/?companycode=vg-cpeh&lang=en-GB"
@@ -5602,7 +5634,7 @@
  </div>
  </div>
  <div class="foot-bottom">
- <span>© 2026 Shaires · listed on AIM</span>
+ <span>© 2026 Shaires · Quoted on AIM</span>
  <span>Investments in private securities involve significant risk of loss.</span>
  <a href="#privacy" style="color:inherit; text-decoration:none">Privacy policy</a>
  </div>
@@ -5834,9 +5866,9 @@
     // Time-limited access codes. The raw codes are NOT stored in the page —
     // only their cyrb53 digests — and any matching code grants override until
     // the expiry date below. After expiry, every code stops working.
-    const GEO_CODES_EXPIRY = Date.parse('2026-07-17T23:59:59Z'); // valid 30 days
-    const GEO_CODES_SEED = 1397244233;
-    const GEO_CODE_DIGESTS = new Set([4804947003154515,828523074472088,5700504642097483,6098311587303919,104750795319375,3704392002585722,4784566674286159,3402791834813821,6730253977774404,1738363183567292,3202052946023219,6717086645148912,6126845305129255,1503215988030514,4539756267372438,266465806760536,7870964568099565,7644794475462190,3527150214482377,8343807168159457,7970003788592128,2535702050555060,1736228021043570,5284660275722720,8716860389906019,3498803282166290,6403884494153156,5655074044808692,4619650171099099,4745414857770818,7640608803005093,6299034396443000,8958730865186681,7513990781906292,2001383527646540,8296710221695534,7296890176004571,4988527258013922,1726317138341359,603658316939648,4267570651943068,1800728392471663,1501477705359642,4881596806691994,1634047446274259,6745036760901629,487839306128226,7207808437844567,560342948495389,4318655267263973,7619229073749145,8687578506710042,5840351160421516,2521291279283125,7993263225444116,3106421389955186,710291702257947,912790944281370,4469844646576084,7829566006589950,6664140916405984,6691381916431771,4201476576278654,6449724177541497,2272207559939379,1878353860902248,7231059823577992,5968046426980773,4483498236930959,5880789484499204,3360731140383336,2055711094009738,2352110147490965,5787308017836453,7505288857951169,4483675727567036,7535788973923115,868757075086919,2897390625188153,6684200159322658,2298756217122849,1375773957495796,1137672679191806,2498792363173366,5299407786069166,6509485799900754,7826758550116148,7442965508245084,7964632936701090,7627403094557912,753260176300900,7619056558254340,2167114839945405,894480152680894,87638936678420,2705555709424328,4211749158815479,8101294157335787,353749536421145,4818137893738235]);
+    const GEO_CODES_EXPIRY = Date.parse('2026-09-12T23:59:59Z'); // valid 30 days, issued 13 Aug 2026
+    const GEO_CODES_SEED = 1027167018;
+    const GEO_CODE_DIGESTS = new Set([8822297930461105,7560627006077656,7989965679508259,7612040225256638,6214986238558398,5344800117123261,5073366604880792,4855425874724300,2260052294501707,2626618952798325,1686929891570740,8696824620204956,3225747317653973,7884291205459289,6342187410655016,3552626069908971,5667902896116531,3892460540573579,7857065512100965,3356197119757887,674964788010410,6148977341239285,7431511879874865,3197159193268640,5417011905915258,77298074688207,2295054273521362,1293651060999940,7408240194530945,2653212601871433,3264112779626190,4003940134192813,5728038559560545,5362909487791784,3925998926608830,3799157195952619,2300869602120782,2158924493344683,3961900479038267,5941466996010591,2457893034611968,2161529295996323,8986695404259177,34204414972446,2419241726490574,8854768041305758,8212428342303797,3515579166260276,888986554492305,8184937936260992,5690331604626701,8053316113449691,7421410890119526,1590718916991413,4158822765531556,4054079819658682,4884402128807887,6251085419902249,2842637475419392,1332869930084239,3632956701198058,4689272481206262,6101582451178473,6409235966324463,291760348041262,6218577145837268,3369782085986478,1968002407139251,444704836207588,2820933562131605,2048424932714420,171782562171367,8301839391573750,1164442769425627,8879321082989943,2086379139014137,6049212272370609,277236011025974,5447967188963996,8770881166555454,971710803695087,5809213340152690,7900627118909389,3687369607227991,5194131541331229,5744877097818023,5360318065862019,7165642322555438,8150590930432483,7465354357071606,1530121398634403,8559936141998204,809663797299106,7434453968874820,1234661351165014,5047586198375592,6907530455209714,3830728986092569,2111069815584950,2381853992362456]);
     const cyrb53 = function(str, seed){
       let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
       for (let i = 0, ch; i < str.length; i++){
@@ -7637,6 +7669,62 @@ function shairesInitHero(){
   }
   if (Date.now() >= GO_LIVE || unlocked()) show();
   else { var w = GO_LIVE - Date.now(); if (w > 0 && w < 86400000) setTimeout(show, w); }
+})();
+</script>
+
+
+<!-- Desktop-only: a single, gentle nudge after a few seconds on the hero so
+     visitors realise there is more below. Cancelled by any interaction,
+     fires once per session, and skipped for reduced-motion. -->
+<script>
+(function(){
+  var DELAY  = 4200;   /* ms on the hero before the nudge */
+  var ONCE   = 'shaires-hero-nudged-v1';
+  var hero   = document.querySelector('header.hero');
+  if (!hero) return;
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var desktop = window.matchMedia && window.matchMedia('(min-width:901px)').matches;
+  var already = false;
+  try { already = sessionStorage.getItem(ONCE) === '1'; } catch(e){}
+
+  /* fade the cue out as soon as they start scrolling themselves */
+  var onFirstScroll = function(){
+    if (window.pageYOffset > 4) document.body.classList.add('has-scrolled');
+  };
+  window.addEventListener('scroll', onFirstScroll, { passive:true });
+  onFirstScroll();
+
+  if (!desktop || reduced || already) return;
+
+  var cancelled = false;
+  var cancel = function(){ cancelled = true; teardown(); };
+  var events = ['wheel','touchstart','keydown','pointerdown','scroll'];
+  function teardown(){ events.forEach(function(e){ window.removeEventListener(e, cancel); }); }
+  events.forEach(function(e){ window.addEventListener(e, cancel, { passive:true, once:true }); });
+
+  /* the disclaimer locks scrolling — wait until it has been dismissed */
+  function whenScrollable(cb){
+    var modal = document.querySelector('.disclaimer-modal');
+    if (!modal || !modal.classList.contains('is-open')) { cb(); return; }
+    var mo = new MutationObserver(function(){
+      if (!modal.classList.contains('is-open')) { mo.disconnect(); cb(); }
+    });
+    mo.observe(modal, { attributes:true, attributeFilter:['class'] });
+  }
+
+  whenScrollable(function(){
+    setTimeout(function(){
+      if (cancelled) return;
+      if (window.pageYOffset > 4) return;              /* already moved */
+      if (document.body.classList.contains('geo-block-open')) return;
+      try { sessionStorage.setItem(ONCE, '1'); } catch(e){}
+      /* just enough to lift the next section into view, then stop */
+      var nudge = Math.round(Math.min(170, window.innerHeight * 0.17));
+      window.scrollTo({ top: nudge, behavior: 'smooth' });
+      teardown();
+    }, DELAY);
+  });
 })();
 </script>
 
