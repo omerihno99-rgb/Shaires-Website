@@ -3206,6 +3206,11 @@
     .ip-doctable .doc-action a{ font-size:0; gap:0 }
     .ip-doctable .doc-action a svg{ width:14px; height:14px }
   }
+  /* Tablet range too: the arrow alone is self-explanatory */
+  @media (max-width:900px){
+    .ip-doctable .doc-action a{ font-size:0; gap:0 }
+    .ip-doctable .doc-action a svg{ width:14px; height:14px }
+  }
 
   /* ---------- Euroland IR embed ---------- */
   .ip-rns-embed{
@@ -4545,7 +4550,7 @@
  <a class="invcard" href="#inv/financial-reports"><h4>Financial Reports</h4><span class="arr">↗</span><span class="num">09</span></a>
  <a class="invcard" href="#inv/regulatory-announcements"><h4>Regulatory Announcements</h4><span class="arr">↗</span><span class="num">10</span></a>
  <a class="invcard" href="#inv/corporate-governance"><h4>Corporate Governance</h4><span class="arr">↗</span><span class="num">11</span></a>
- <a class="invcard" href="#inv/supported-platforms"><h4>Supported Trading Platforms</h4><span class="arr">↗</span><span class="num">12</span></a>
+ <a class="invcard" href="#inv/presentations-media"><h4>Presentations &amp; Media</h4><span class="arr">↗</span><span class="num">12</span></a>
  </div>
  </div>
 </section>
@@ -5048,6 +5053,23 @@
  </tbody>
  </table>
  <p class="ip-foot">The percentage of shares not in public hands (as defined in the AIM Rules for Companies) is <strong>52.97%</strong>, updated as of 9 February 2026.</p>
+
+ <h2 class="ip-h3">Supported Trading <em>Platforms.</em></h2>
+ <div class="ip-body">
+ <p>SHR shares are tradeable on the following UK and international trading platforms:</p>
+ </div>
+ <ul class="ip-bullets" style="max-width:760px">
+ <li>AJ Bell</li>
+ <li>Hargreaves Lansdown</li>
+ <li>IG</li>
+ <li>Interactive Brokers</li>
+ <li>Interactive Investor</li>
+ <li>Lloyds-Halifax Share Dealing</li>
+ <li>Pershing</li>
+ <li>Scottish Widows Share Dealing (formerly iWeb)</li>
+ <li>Trading 212</li>
+ </ul>
+ <p class="ip-foot">Availability, fees and trading conditions differ by platform. The Company does not endorse any particular broker or platform and shareholders should undertake their own due diligence.</p>
  </div>
  </main>
 
@@ -5216,7 +5238,7 @@
  <p style="font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:0 0 10px;">Complete public record</p>
  <h3 style="font-family:'Fraunces', serif; font-weight:400; font-size:22px; letter-spacing:-0.02em; line-height:1.25; margin:0 0 8px; color:var(--ink);">Every regulated filing on the FCA NSM</h3>
  <p style="font-size:14.5px; line-height:1.55; color:var(--ink-2); margin:0 0 20px; max-width:62ch;">All UK-listed companies file their regulated documents with the FCA's National Storage Mechanism. The button below opens the official NSM record filtered to Shaires Holdings &mdash; every circular, annual report, prospectus and notice is listed in chronological order and updated automatically as new filings are submitted.</p>
- <a href="https://data.fca.org.uk/#/nsm/nationalstoragemechanism?q=shaires+holdings" target="_blank" rel="noopener" class="ihb sm" style="text-decoration:none;">
+ <a href="https://data.fca.org.uk/#/nsm/nationalstoragemechanism?q=shaires+holdings" target="_blank" rel="noopener" class="ihb sm ihb-nsm" style="text-decoration:none;">
  <span class="ihb-idle">
  <span class="ihb-text">View all filings on the FCA NSM</span>
  </span>
@@ -5355,7 +5377,7 @@
  <span>Back to Investors</span>
  </span>
  </a>
- <nav class="ip-pagenav" aria-label="Page navigation"><a class="ip-pagenav-link prev" href="#inv/regulatory-announcements"><svg class="ip-pagenav-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span class="ip-pagenav-title">Regulatory Announcements</span></a><a class="ip-pagenav-link next" href="#inv/supported-platforms"><span class="ip-pagenav-title">Supported Trading Platforms</span><svg class="ip-pagenav-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></nav>
+ <nav class="ip-pagenav" aria-label="Page navigation"><a class="ip-pagenav-link prev" href="#inv/regulatory-announcements"><svg class="ip-pagenav-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span class="ip-pagenav-title">Regulatory Announcements</span></a><a class="ip-pagenav-link next" href="#inv/presentations-media"><span class="ip-pagenav-title">Presentations &amp; Media</span><svg class="ip-pagenav-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></nav>
  </div>
  <p class="ip-eyebrow">Investors / 11</p>
  <h1 class="ip-title">Corporate <em>Governance.</em></h1>
@@ -5522,8 +5544,8 @@
  </div>
  </main>
 
- <!-- 12 / Supported Trading Platforms -->
- <main class="ip-page" id="inv-supported-platforms">
+ <!-- 12 / Presentations & Media -->
+ <main class="ip-page" id="inv-presentations-media">
  <div class="wrap">
  <div class="ip-back-row">
  <a href="#investors" class="ihb sm ihb-back" data-back-to-investors>
@@ -5538,23 +5560,31 @@
  </a>
  <nav class="ip-pagenav" aria-label="Page navigation"><a class="ip-pagenav-link prev" href="#inv/corporate-governance"><svg class="ip-pagenav-arrow" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span class="ip-pagenav-title">Corporate Governance</span></a></nav>
  </div>
+
  <p class="ip-eyebrow">Investors / 12</p>
- <h1 class="ip-title">Supported Trading <em>Platforms.</em></h1>
- <p class="ip-lede">SHR shares are tradeable on the following UK and International trading platforms:</p>
+ <h1 class="ip-title">Presentations &amp; <em>Media.</em></h1>
+ <p class="ip-lede">Company films, presentations and investor materials. New items are added to this page as they are published.</p>
 
- <ul class="ip-bullets" style="max-width:760px">
- <li>AJ Bell</li>
- <li>Hargreaves Lansdown</li>
- <li>IG</li>
- <li>Interactive Brokers</li>
- <li>Interactive Investor</li>
- <li>Lloyds-Halifax Share Dealing</li>
- <li>Pershing</li>
- <li>Scottish Widows Share Dealing (formerly iWeb)</li>
- <li>Trading 212</li>
- </ul>
+ <h2 class="ip-h3">Shaires <em>Overview Film.</em></h2>
+ <div class="film-frame" id="pmFrame" style="margin:8px 0 12px">
+ <div class="film-poster" id="pmPoster" style="--poster:url(&quot;https://i.vimeocdn.com/video/2188639836-8d6899357f059b64d13d123cfe206f97bf2445f5cc89913ab225a9e6a4738645-d_1280x720&quot;)"></div>
+ <button class="film-ctrl" id="pmCtrl" type="button" aria-label="Play the Shaires overview">
+ <svg class="i-play" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 12v40l34-20z"/></svg>
+ <svg class="i-pause" viewBox="0 0 64 64" aria-hidden="true"><rect x="20" y="13" width="8" height="38" rx="1"/><rect x="36" y="13" width="8" height="38" rx="1"/></svg>
+ </button>
+ <span class="film-runtime">5:17</span>
+ </div>
+ <p class="ip-foot" style="margin-top:0">Pure exposure to the AI supercycle. The thinking behind Shaires, in just over five minutes.</p>
 
- <p class="ip-foot">Availability, fees and trading conditions differ by platform. The Company does not endorse any particular broker or platform and shareholders should undertake their own due diligence.</p>
+ <h2 class="ip-h3">Documents &amp; <em>Materials.</em></h2>
+ <table class="ip-doctable">
+ <colgroup><col class="col-date" /><col /><col class="col-action" /></colgroup>
+ <thead><tr><th>Date</th><th>Item</th><th class="doc-action">Action</th></tr></thead>
+ <tbody>
+ <tr><td class="doc-date">12/08/2026</td><td class="doc-title">Shaires - Retail Investor Factsheet</td><td class="doc-action"><a href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
+ </tbody>
+ </table>
+ <p class="ip-foot">Media enquiries: <a href="mailto:shaires@tavistock.co.uk" style="color:var(--ink); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px">shaires@tavistock.co.uk</a> (Tavistock).</p>
  </div>
  </main>
 
@@ -7761,5 +7791,77 @@ function shairesInitHero(){
 </script>
 
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7bf329f032a44db686d62c10c46550f9"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Presentations & Media: video facade -->
+<script>
+(function(){
+  var frame = document.getElementById('pmFrame');
+  var ctrl  = document.getElementById('pmCtrl');
+  if (!frame || !ctrl) return;
+  var iframe = null, ORIGIN = 'https://player.vimeo.com';
+  function post(method){
+    if (!iframe || !iframe.contentWindow) return;
+    try { iframe.contentWindow.postMessage(JSON.stringify({ method: method }), ORIGIN); } catch(e){}
+  }
+  function start(){
+    if (iframe) return;
+    iframe = document.createElement('iframe');
+    iframe.src = ORIGIN + '/video/1217052465?h=50cb6a35f5&autoplay=1&byline=0&portrait=0&title=0&dnt=1';
+    iframe.title = 'Shaires overview';
+    iframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+    iframe.setAttribute('allowfullscreen','');
+    frame.appendChild(iframe);
+    frame.classList.add('is-playing');
+    frame.classList.remove('is-paused');
+    ctrl.setAttribute('aria-label','Pause the Shaires overview');
+    iframe.addEventListener('load', function(){
+      post('addEventListener:play');
+      post('addEventListener:pause');
+      post('addEventListener:ended');
+    });
+  }
+  ctrl.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (!iframe){ start(); return; }
+    if (frame.classList.contains('is-paused')) post('play'); else post('pause');
+  });
+  frame.addEventListener('click', function(){ if (!iframe) start(); });
+  window.addEventListener('message', function(e){
+    if (e.origin !== ORIGIN || !iframe) return;
+    var d; try { d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch(err){ return; }
+    if (!d || !d.event) return;
+    if (d.event === 'play'){ frame.classList.remove('is-paused'); ctrl.setAttribute('aria-label','Pause the Shaires overview'); }
+    else if (d.event === 'pause' || d.event === 'ended'){ frame.classList.add('is-paused'); ctrl.setAttribute('aria-label','Play the Shaires overview'); }
+  });
+})();
+</script>
+<style>
+/* ---------- Flat button hovers (no sliding fill) ----------
+   Pagenav pills + Back pills: hover/tap = solid ink fill, cream text.
+   NSM button: hover/tap = beige stays, outline + text turn orange, no arrow.
+   Identical treatment for mouse hover and touch :active. */
+.ip-pagenav-link{ transition:background-color .18s ease, border-color .18s ease, color .18s ease }
+.ip-pagenav-link::before{ display:none }
+.ip-pagenav-link .ipn-hover{ display:none }
+.ip-pagenav-link:hover .ipn-idle,
+.ip-pagenav-link:active .ipn-idle{ transform:none; opacity:1 }
+.ip-pagenav-link:hover,
+.ip-pagenav-link:active{ background:var(--ink); border-color:var(--ink); color:var(--bg) }
+
+.ihb-back{ transition:background-color .18s ease, border-color .18s ease, color .18s ease }
+.ihb-back .ihb-hover{ display:none }
+.ihb-back:hover .ihb-text,
+.ihb-back:active .ihb-text{ transform:none; opacity:1; color:var(--bg) }
+.ihb-back:hover .ihb-idle,
+.ihb-back:active .ihb-idle{ color:var(--bg) }
+.ihb-back:hover,
+.ihb-back:active{ background:var(--ink); border-color:var(--ink); color:var(--bg) }
+
+.ihb-nsm{ transition:border-color .18s ease, color .18s ease }
+.ihb-nsm .ihb-hover{ display:none }
+.ihb-nsm:hover .ihb-text,
+.ihb-nsm:active .ihb-text{ transform:none; opacity:1; color:var(--accent) }
+.ihb-nsm:hover,
+.ihb-nsm:active{ background:var(--bg); border-color:var(--accent); color:var(--accent) }
+</style>
 </body>
 </html>

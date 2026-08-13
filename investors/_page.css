@@ -810,3 +810,35 @@ nav.top.scrolled .nav-links{
   .ip-table thead th{ font-size:10px }
   .ip-footer-inner{ flex-direction:column; gap:14px; text-align:center }
 }
+
+
+/* ---------- Flat button hovers (no sliding fill) ---------- */
+.ip-pagenav-link{ transition:background-color .18s ease, border-color .18s ease, color .18s ease }
+.ip-pagenav-link::before{ display:none }
+.ip-pagenav-link .ipn-hover{ display:none }
+.ip-pagenav-link:hover .ipn-idle,
+.ip-pagenav-link:active .ipn-idle{ transform:none; opacity:1 }
+.ip-pagenav-link:hover,
+.ip-pagenav-link:active{ background:var(--ink); border-color:var(--ink); color:var(--bg) }
+
+.ihb-back{ transition:background-color .18s ease, border-color .18s ease, color .18s ease }
+.ihb-back .ihb-hover{ display:none }
+.ihb-back:hover .ihb-text,
+.ihb-back:active .ihb-text{ transform:none; opacity:1; color:var(--bg) }
+.ihb-back:hover .ihb-idle,
+.ihb-back:active .ihb-idle{ color:var(--bg) }
+.ihb-back:hover,
+.ihb-back:active{ background:var(--ink); border-color:var(--ink); color:var(--bg) }
+
+.ihb-nsm{ transition:border-color .18s ease, color .18s ease }
+.ihb-nsm .ihb-hover{ display:none }
+.ihb-nsm:hover .ihb-text,
+.ihb-nsm:active .ihb-text{ transform:none; opacity:1; color:var(--accent) }
+.ihb-nsm:hover,
+.ihb-nsm:active{ background:var(--bg); border-color:var(--accent); color:var(--accent) }
+
+/* Arrow-only downloads through tablet widths */
+@media (max-width:900px){
+  .ip-doctable .doc-action a{ font-size:0; gap:0 }
+  .ip-doctable .doc-action a svg{ width:14px; height:14px }
+}
