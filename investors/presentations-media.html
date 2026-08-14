@@ -183,9 +183,20 @@
   var ctrl  = document.getElementById('pmCtrl');
   if (!frame || !ctrl) return;
   var iframe = null, ORIGIN = 'https://player.vimeo.com';
-  function post(method){
+  function post(method, value){
     if (!iframe || !iframe.contentWindow) return;
-    try { iframe.contentWindow.postMessage(JSON.stringify({ method: method }), ORIGIN); } catch(e){}
+    var msg = { method: method };
+    if (value !== undefined) msg.value = value;
+    try { iframe.contentWindow.postMessage(JSON.stringify(msg), ORIGIN); } catch(e){}
+  }
+  /* Vimeo's message API wants {method:'addEventListener', value:'play'} —
+     a colon-joined method name is silently ignored, which left the mark
+     out of sync with the player. Subscribe on 'ready' (the reliable
+     moment) and again on iframe load as a belt-and-braces. */
+  function subscribe(){
+    post('addEventListener', 'play');
+    post('addEventListener', 'pause');
+    post('addEventListener', 'ended');
   }
   function start(){
     if (iframe) return;
@@ -199,9 +210,7 @@
     frame.classList.remove('is-paused');
     ctrl.setAttribute('aria-label','Pause the Shaires overview');
     iframe.addEventListener('load', function(){
-      post('addEventListener:play');
-      post('addEventListener:pause');
-      post('addEventListener:ended');
+      subscribe();
     });
   }
   ctrl.addEventListener('click', function(e){
@@ -214,6 +223,7 @@
     if (e.origin !== ORIGIN || !iframe) return;
     var d; try { d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch(err){ return; }
     if (!d || !d.event) return;
+    if (d.event === 'ready'){ subscribe(); return; }
     if (d.event === 'play'){ frame.classList.remove('is-paused'); ctrl.setAttribute('aria-label','Pause the Shaires overview'); }
     else if (d.event === 'pause' || d.event === 'ended'){ frame.classList.add('is-paused'); ctrl.setAttribute('aria-label','Play the Shaires overview'); }
   });
