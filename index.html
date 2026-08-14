@@ -4161,7 +4161,7 @@
     </div>
 
     <div class="film-frame film-reveal" id="filmFrame">
-      <div class="film-poster" id="filmPoster" style="--poster:url(&quot;https://i.vimeocdn.com/video/2188639836-8d6899357f059b64d13d123cfe206f97bf2445f5cc89913ab225a9e6a4738645-d_1280x720&quot;)"></div>
+      <div class="film-poster" id="filmPoster" style="--poster:url(&quot;investors/docs/film-poster.webp&quot;)"></div>
       <button class="film-ctrl" id="filmCtrl" type="button" aria-label="Play the Shaires overview">
         <svg class="i-play"  viewBox="0 0 64 64" aria-hidden="true"><path d="M20 12v40l34-20z"/></svg>
         <svg class="i-pause" viewBox="0 0 64 64" aria-hidden="true"><rect x="20" y="13" width="8" height="38" rx="1"/><rect x="36" y="13" width="8" height="38" rx="1"/></svg>
@@ -5568,7 +5568,7 @@
  <div class="ip-info-card">
  <p class="ip-info-card-label">Overview film</p>
  <div class="film-frame" id="pmFrame" style="margin:6px 0 14px">
- <div class="film-poster" id="pmPoster" style="--poster:url(&quot;https://i.vimeocdn.com/video/2188639836-8d6899357f059b64d13d123cfe206f97bf2445f5cc89913ab225a9e6a4738645-d_1280x720&quot;)"></div>
+ <div class="film-poster" id="pmPoster" style="--poster:url(&quot;investors/docs/film-poster.webp&quot;)"></div>
  <button class="film-ctrl" id="pmCtrl" type="button" aria-label="Play the Shaires overview">
  <svg class="i-play" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 12v40l34-20z"/></svg>
  <svg class="i-pause" viewBox="0 0 64 64" aria-hidden="true"><rect x="20" y="13" width="8" height="38" rx="1"/><rect x="36" y="13" width="8" height="38" rx="1"/></svg>
@@ -7891,6 +7891,12 @@ function shairesInitHero(){
   border:1px solid rgba(17,19,17,.16); border-radius:10px;
   transition:border-color .18s ease }
 .pm-cover-link:hover .pm-cover{ border-color:var(--accent) }
+
+/* Light illustrated poster: ink play mark + runtime while idle,
+   white again once the film is actually playing */
+.film-frame .film-ctrl{ color:var(--ink); filter:drop-shadow(0 1px 6px rgba(244,241,234,.7)) }
+.film-frame.is-playing .film-ctrl{ color:#fff; filter:drop-shadow(0 2px 14px rgba(0,0,0,.45)) }
+.film-frame .film-runtime{ color:rgba(17,19,17,.6); text-shadow:none }
 .ip-pagenav-link.next:hover .ipn-idle,
 .ip-pagenav-link.prev:hover .ipn-idle,
 .ip-pagenav-link.next:active .ipn-idle,
