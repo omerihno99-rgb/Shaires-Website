@@ -4721,7 +4721,7 @@
  <div class="cta">
  <h2>Speak with the Shaires team.</h2>
  <div style="display:flex; gap:14px; flex-wrap:wrap">
- <a href="mailto:ir@shaires-holdings.com" class="ihb">
+ <a href="mailto:ir@shaires-holdings.com" class="ihb ihb-email">
  <span class="ihb-idle">
  <span class="ihb-dot"></span>
  <span class="ihb-text">ir@shaires-holdings.com</span>
@@ -5565,8 +5565,9 @@
  <h1 class="ip-title">Presentations &amp; <em>Media.</em></h1>
  <p class="ip-lede">Company films, presentations and investor materials. New items are added to this page as they are published.</p>
 
- <h2 class="ip-h3">Shaires <em>Overview Film.</em></h2>
- <div class="film-frame" id="pmFrame" style="margin:8px 0 12px">
+ <div class="ip-info-card">
+ <p class="ip-info-card-label">Overview film</p>
+ <div class="film-frame" id="pmFrame" style="margin:6px 0 14px">
  <div class="film-poster" id="pmPoster" style="--poster:url(&quot;https://i.vimeocdn.com/video/2188639836-8d6899357f059b64d13d123cfe206f97bf2445f5cc89913ab225a9e6a4738645-d_1280x720&quot;)"></div>
  <button class="film-ctrl" id="pmCtrl" type="button" aria-label="Play the Shaires overview">
  <svg class="i-play" viewBox="0 0 64 64" aria-hidden="true"><path d="M20 12v40l34-20z"/></svg>
@@ -5574,17 +5575,27 @@
  </button>
  <span class="film-runtime">5:17</span>
  </div>
- <p class="ip-foot" style="margin-top:0">Pure exposure to the AI supercycle. The thinking behind Shaires, in just over five minutes.</p>
+ <p>Pure exposure to the AI supercycle. The thinking behind Shaires, in just over five minutes.</p>
+ </div>
 
- <h2 class="ip-h3">Documents &amp; <em>Materials.</em></h2>
- <table class="ip-doctable">
- <colgroup><col class="col-date" /><col /><col class="col-action" /></colgroup>
- <thead><tr><th>Date</th><th>Item</th><th class="doc-action">Action</th></tr></thead>
- <tbody>
- <tr><td class="doc-date">12/08/2026</td><td class="doc-title">Shaires - Retail Investor Factsheet</td><td class="doc-action"><a href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
- </tbody>
- </table>
- <p class="ip-foot">Media enquiries: <a href="mailto:shaires@tavistock.co.uk" style="color:var(--ink); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px">shaires@tavistock.co.uk</a> (Tavistock).</p>
+ <div class="ip-twocol">
+ <div class="ip-info-card">
+ <p class="ip-info-card-label">Retail investor factsheet</p>
+ <a class="pm-cover-link" href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener" aria-label="Open the retail investor factsheet (PDF)"><img class="pm-cover" src="investors/docs/factsheet-cover.webp" alt="Retail investor factsheet cover" loading="lazy"></a>
+ <p>A concise introduction to Shaires for retail investors. Published 12 August 2026.</p>
+ <ul class="ip-info-list">
+ <li><a href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">Open the factsheet &rarr;</a></li>
+ </ul>
+ </div>
+ <div class="ip-info-card">
+ <p class="ip-info-card-label">Media enquiries</p>
+ <p>Tavistock acts as financial PR adviser to Shaires. For press, interview and image requests:</p>
+ <ul class="ip-info-list">
+ <li><a href="mailto:shaires@tavistock.co.uk">shaires@tavistock.co.uk &rarr;</a></li>
+ <li><a href="tel:+442079203150">+44 (0)20 7920 3150 &rarr;</a></li>
+ </ul>
+ </div>
+ </div>
  </div>
  </main>
 
@@ -7862,6 +7873,24 @@ function shairesInitHero(){
 .ihb-nsm:active .ihb-text{ transform:none; opacity:1; color:var(--accent) }
 .ihb-nsm:hover,
 .ihb-nsm:active{ background:var(--bg); border-color:var(--accent); color:var(--accent) }
+
+/* CTA email pill: ink-on-ink with beige outline; hover = orange outline + text */
+.cta .ihb-email{ background:transparent; color:var(--bg); border-color:var(--bg);
+  transition:border-color .18s ease, color .18s ease }
+.cta .ihb-email .ihb-dot{ display:none }
+.cta .ihb-email .ihb-hover{ display:none }
+.cta .ihb-email .ihb-text{ color:inherit; transform:none; opacity:1 }
+.cta .ihb-email:hover .ihb-text,
+.cta .ihb-email:active .ihb-text{ color:inherit; transform:none; opacity:1 }
+.cta .ihb-email:hover,
+.cta .ihb-email:active{ background:transparent; border-color:var(--accent); color:var(--accent); transform:none }
+
+/* Presentations & Media: factsheet cover preview */
+.pm-cover-link{ display:inline-block; line-height:0; margin:6px 0 14px }
+.pm-cover{ display:block; width:100%; max-width:240px;
+  border:1px solid rgba(17,19,17,.16); border-radius:10px;
+  transition:border-color .18s ease }
+.pm-cover-link:hover .pm-cover{ border-color:var(--accent) }
 .ip-pagenav-link.next:hover .ipn-idle,
 .ip-pagenav-link.prev:hover .ipn-idle,
 .ip-pagenav-link.next:active .ipn-idle,

@@ -837,6 +837,13 @@ nav.top.scrolled .nav-links{
 .ihb-nsm:hover,
 .ihb-nsm:active{ background:var(--bg); border-color:var(--accent); color:var(--accent) }
 
+/* Presentations & Media: factsheet cover preview */
+.pm-cover-link{ display:inline-block; line-height:0; margin:6px 0 14px }
+.pm-cover{ display:block; width:100%; max-width:240px;
+  border:1px solid rgba(17,19,17,.16); border-radius:10px;
+  transition:border-color .18s ease }
+.pm-cover-link:hover .pm-cover{ border-color:var(--accent) }
+
 .ip-pagenav-link.next:hover .ipn-idle,
 .ip-pagenav-link.prev:hover .ipn-idle,
 .ip-pagenav-link.next:active .ipn-idle,
