@@ -7912,11 +7912,11 @@ function shairesInitHero(){
   transition:border-color .18s ease }
 .pm-cover-link:hover .pm-cover{ border-color:var(--accent) }
 
-/* Light illustrated poster: ink play mark + runtime while idle,
-   white again once the film is actually playing */
-.film-frame .film-ctrl{ color:var(--ink); filter:drop-shadow(0 1px 6px rgba(244,241,234,.7)) }
-.film-frame.is-playing .film-ctrl{ color:#fff; filter:drop-shadow(0 2px 14px rgba(0,0,0,.45)) }
-.film-frame .film-runtime{ color:rgba(17,19,17,.6); text-shadow:none }
+/* CTA: heading on one line, sitting at the same height as the pills */
+@media (min-width:901px){
+  .cta h2{ font-size:clamp(22px, 2.4vw, 30px); line-height:40px;
+    white-space:nowrap; max-width:none }
+}
 .ip-pagenav-link.next:hover .ipn-idle,
 .ip-pagenav-link.prev:hover .ipn-idle,
 .ip-pagenav-link.next:active .ipn-idle,
