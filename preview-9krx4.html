@@ -209,27 +209,9 @@
   .nav-links a.active{
     background:var(--bg);
     color:var(--ink);
-    padding-right:22px;  /* room for the orange "you are here" dot */
     box-shadow:
       0 1px 2px rgba(17,19,17,.08),
       0 0 0 1px rgba(17,19,17,.04);
-  }
-  /* Small accent dot pinned to the right of the active label.
-     Fades + scales in so the indicator reads as part of the same motion. */
-  .nav-links a::after{
-    content:"";
-    position:absolute;
-    right:10px; top:50%;
-    width:5px; height:5px;
-    border-radius:50%;
-    background:var(--accent);
-    transform:translateY(-50%) scale(0);
-    opacity:0;
-    transition:transform .25s cubic-bezier(.4, 0, .2, 1), opacity .25s cubic-bezier(.4, 0, .2, 1);
-  }
-  .nav-links a.active::after{
-    transform:translateY(-50%) scale(1);
-    opacity:1;
   }
   @media (max-width:860px){
     .nav-links{display:none}
@@ -678,7 +660,6 @@
   .basket.b2{background:var(--bg-2)}
   .basket .head{display:flex; justify-content:space-between; align-items:center; margin-bottom:6px}
   .basket .kicker{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase}
-  .basket-target{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase; margin:0 0 2px}
   .basket .pct{
     font-family:'Fraunces',serif; font-weight:300;
     font-size:clamp(96px,14vw,192px); line-height:.9; letter-spacing:-0.05em;
@@ -4523,9 +4504,8 @@
  <div class="baskets">
  <div class="basket b1">
  <div class="head">
- <div class="kicker">Basket 01 — Builders</div>
+ <div class="kicker">Basket 01 — Builders target</div>
    </div>
- <div class="basket-target">Target</div>
  <div class="pct">65%</div>
  <h3>Frontier model builders</h3>
  <p>The labs racing toward general intelligence. Capital-intensive, compute-bound, and the source of every downstream cash flow in the AI economy.</p>
@@ -4534,9 +4514,8 @@
 
  <div class="basket b2">
  <div class="head">
- <div class="kicker">Basket 02 — Beneficiaries</div>
+ <div class="kicker">Basket 02 — Beneficiaries target</div>
    </div>
- <div class="basket-target">Target</div>
  <div class="pct">35%</div>
  <h3>AI beneficiaries</h3>
  <p>AI infra, defence and dual-use, fintech rails, enterprise SaaS. Operators deploying frontier AI with 20-40% annual growth.</p>
