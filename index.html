@@ -4354,6 +4354,29 @@
   var PREVIEW_KEY = 'cav81dllxremeq';
 
   var section = document.getElementById('overview');
+
+  /* Deep link support: #overview (or legacy #film) must land on this
+     section even though it starts hidden and the disclaimer briefly locks
+     scrolling. Poll gently until the section is visible and positioned,
+     then stop; any manual scroll cancels immediately. */
+  (function(){
+    if (!/^#(overview|film)$/.test(location.hash)) return;
+    var tries = 0;
+    var timer = setInterval(function(){
+      tries++;
+      var s = document.getElementById('overview');
+      if (s && !s.hidden && !document.body.classList.contains('modal-open')){
+        var r = s.getBoundingClientRect();
+        if (Math.abs(r.top) < 40){ clearInterval(timer); return; }
+        s.scrollIntoView({ behavior:'auto', block:'start' });
+      }
+      if (tries > 40) clearInterval(timer);
+    }, 400);
+    var stop = function(){ clearInterval(timer); };
+    window.addEventListener('wheel', stop, { once:true, passive:true });
+    window.addEventListener('touchstart', stop, { once:true, passive:true });
+    window.addEventListener('keydown', stop, { once:true });
+  })();
   if (!section) return;
 
   /* ---- gate ---------------------------------------------------- */

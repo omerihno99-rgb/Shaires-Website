@@ -60,6 +60,7 @@ nav.top.scrolled{
   color:var(--ink);
 }
 .brand em{ font-style:normal; font-weight:400; color:var(--accent) }
+.brand .brand-dot{ color:var(--accent) }
 
 .nav-links{
   display:inline-flex;
