@@ -4273,9 +4273,15 @@
     .fb-broker{ grid-row:3; grid-column:auto }
   }
   @media (max-width:600px){
-    .film-bento{ grid-template-columns:1fr }
-    .fb-video, .fb-fact, .fb-broker{ grid-column:1 }
-    .fb-fact{ grid-row:auto } .fb-broker{ grid-row:auto }
+    .film-bento{ grid-template-columns:1fr 1fr; gap:12px }
+    .fb-video, .fb-fact{ grid-column:1/3 }
+    .fb-fact{ grid-row:auto; min-height:300px }
+    .fb-broker{ grid-column:auto; grid-row:auto; padding:14px; min-height:0; gap:10px }
+    .fb-chart{ height:56px }
+    .fb-logo{ height:22px }
+    .fb-logo-hl{ height:30px }
+    .fb-mark{ min-height:34px }
+    .fb-cta{ font-size:13.5px }
   }
   @media (prefers-reduced-motion: reduce){
     .film-reveal, .film-reveal.in{ opacity:1; transform:none; transition:none }
