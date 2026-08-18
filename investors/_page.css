@@ -872,6 +872,10 @@ nav.top.scrolled .nav-links{
 @media (max-width:900px){
   .ip-doctable .doc-action a{ font-size:0; gap:0 }
   .ip-doctable .doc-action a svg{ width:14px; height:14px }
+  .ip-doctable .doc-action a::before{
+    content:"Open"; font-family:'Fraunces',serif; font-style:italic;
+    font-size:13px; margin-right:5px;
+  }
 }
 
 
