@@ -263,9 +263,11 @@
     -webkit-backdrop-filter:saturate(180%) blur(20px);
             backdrop-filter:saturate(180%) blur(20px);
     border-top:1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+    /* Fallback for browsers without dvh: pad hard so the CTA clears
+       the mobile browser's floating toolbar. */
     padding:
       18px 0
-      calc(env(safe-area-inset-bottom, 0px) + 32px);
+      calc(env(safe-area-inset-bottom, 0px) + 96px);
     opacity:0;
     visibility:hidden;
     transform:translateY(-6px);
@@ -273,7 +275,18 @@
     /* visibility flip is delayed until the fade-out completes */
     transition:opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
     overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
     overscroll-behavior:contain;
+  }
+  /* iOS Safari reports bottom:0 against the LARGE viewport, so the drawer
+     ran underneath the floating URL bar and cut off the Request access
+     pill. dvh tracks the visible viewport, so the CTA always lands above it. */
+  @supports (height: 100dvh){
+    .nav-drawer{
+      height:calc(100dvh - 60px);
+      bottom:auto;
+      padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);
+    }
   }
   .nav-drawer-inner{
     /* Stretch the inner column to the full drawer height so the links
@@ -303,6 +316,18 @@
     width:100%;
     min-width:0;
     justify-content:center;
+  }
+  /* Short screens (SE-class, or any phone with browser chrome eating height):
+     tighten the link rhythm so all nine links + the CTA fit without scrolling. */
+  @media (max-height: 720px){
+    .nav-drawer{ padding-top:10px }
+    .nav-drawer-inner{ gap:0 }
+    .nav-drawer-inner > a{ padding:9px 4px; font-size:19px }
+    .nav-drawer-cta{ margin-top:auto }
+    .nav-drawer-cta.ihb.sm{ min-height:44px }
+  }
+  @media (max-height: 620px){
+    .nav-drawer-inner > a{ padding:6px 4px; font-size:17.5px }
   }
 
   body.nav-open{ overflow:hidden }
