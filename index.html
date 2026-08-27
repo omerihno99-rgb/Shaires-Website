@@ -298,10 +298,13 @@
     min-height:100%;
   }
   .nav-drawer-inner > a{
-    display:block;
-    padding:14px 4px;
+    /* Stretch each link so the ten rows share all spare height evenly -
+       kills the dead space between Contact and the CTA on tall phones. */
+    display:flex; align-items:center;
+    flex:1 1 auto;
+    padding:12px 4px;
     font-family:'Fraunces', serif; font-weight:400;
-    font-size:22px; letter-spacing:-0.01em;
+    font-size:23px; letter-spacing:-0.01em;
     color:var(--ink);
     border-bottom:1px solid color-mix(in oklab, var(--ink) 8%, transparent);
   }
@@ -3989,7 +3992,7 @@
  <div class="disclaimer-modal-overlay"></div>
  <div class="disclaimer-card">
  <div class="disclaimer-head">
- <p class="disclaimer-eyebrow">Important — Please read</p>
+ <p class="disclaimer-eyebrow">Important - Please read</p>
  <h2 class="disclaimer-title" id="disclaimerTitle">Disclaimer</h2>
  </div>
  <div class="disclaimer-body" tabindex="0">
@@ -4025,6 +4028,7 @@
  <a href="#team">Team</a>
  <a href="#governance">Governance</a>
  <a href="#investors">Investors</a>
+ <a href="#inv/presentations-media">Media</a>
  <a href="#faq">FAQ</a>
  <a href="#contact">Contact</a>
  </div>
@@ -4069,6 +4073,7 @@
  <a href="#team"       data-nav-link>Team</a>
  <a href="#governance" data-nav-link>Governance</a>
  <a href="#investors"  data-nav-link>Investors</a>
+ <a href="#inv/presentations-media" data-nav-link>Media</a>
  <a href="#faq"        data-nav-link>FAQ</a>
  <a href="#contact"    data-nav-link>Contact</a>
  </div>
@@ -4329,7 +4334,7 @@
 <section id="overview" hidden aria-labelledby="filmTitle">
   <div class="wrap">
     <div class="sec-head film-reveal">
-      <div class="sec-label">01 — Overview</div>
+      <div class="sec-label">01 - Overview</div>
       <h2 class="sec-title" id="filmTitle">Watch the <em>Overview.</em> Read the <em>facts.</em></h2>
     </div>
 
@@ -4542,7 +4547,7 @@
 <section id="thesis">
  <div class="wrap">
  <div class="sec-head">
- <div class="sec-label">02 — Why Shaires?</div>
+ <div class="sec-label">02 - Why Shaires?</div>
  <h2 class="sec-title">Two baskets. <em>One supercycle.</em></h2>
  <ul class="sec-bullets">
  <li><em>The problem.</em> Many of the world&rsquo;s best AI companies are staying private for longer than any generation of companies before them, which can mean most of the value is created before they ever list. By the time an IPO arrives, the founders and early backers have already made most of their returns.</li>
@@ -4581,7 +4586,7 @@
 <section id="access">
  <div class="wrap">
  <div class="sec-head">
- <div class="sec-label">03 — Access</div>
+ <div class="sec-label">03 - Access</div>
  <h2 class="sec-title">Access Shaires <em>- laid out.</em></h2>
  <p class="sec-sub">Accessing a portfolio of private companies historically required more than just a significant amount of capital. Today Shaires enables &lsquo;fractionalised like&rsquo; access. Institutional investors such as VCs, secondary funds, and single name SPVs &lsquo;cornered&rsquo; this market long ago. Retail investors were never allowed in and were used as exit liquidity.<br/>This changes today.</p>
  <ul class="sec-bullets">
@@ -4606,13 +4611,13 @@
 <section id="contribute">
  <div class="wrap">
  <div class="sec-head">
- <div class="sec-label">04 — Contribute</div>
+ <div class="sec-label">04 - Contribute</div>
  <h2 class="sec-title">For founders and early shareholders of <em>private AI companies.</em></h2>
  <p class="sec-sub">If you hold shares in a private AI company, Shaires offers a direct route to liquidity - without a traditional secondary sale. Contribute your private shares to Shaires and receive listed, tradeable Shaires shares in return.</p>
  </div>
 
  <div class="contribute-stack-wrap">
-  <div class="contribute-stack" data-contribute-stack aria-label="Contribute steps — tap, swipe, or use the buttons">
+  <div class="contribute-stack" data-contribute-stack aria-label="Contribute steps: tap, swipe, or use the buttons">
    <article class="contribute-card" data-cc data-pos="0">
     <div class="cc-num">01</div>
     <h3 class="cc-title">Exchange</h3>
@@ -4646,7 +4651,7 @@
 <section id="team">
  <div class="wrap">
  <div class="sec-head">
- <div class="sec-label">05 — Team</div>
+ <div class="sec-label">05 - Team</div>
  <h2 class="sec-title">The people behind <em>the thesis.</em></h2>
  <p class="sec-sub">Shaires’ investment decisions are steered by seasoned market professionals. Private market investing success hinges on expert evaluation. Our professionals have developed their expertise by spotting emerging growth prospects at early stages. They have overseen risk management across extended time periods and successfully operated within private markets throughout various economic cycles.</p>
  </div>
@@ -4700,7 +4705,7 @@
 <section id="governance">
  <div class="wrap">
  <div class="sec-head">
- <div class="sec-label">06 — Corporate Governance</div>
+ <div class="sec-label">06 - Corporate Governance</div>
  <h2 class="sec-title">Governance built for a <em>quoted investing company.</em></h2>
  <p class="sec-sub">The Board has decided to apply the Quoted Companies Alliance Corporate Governance Code (the QCA Code).</p>
  </div>
@@ -4753,7 +4758,7 @@
 <section id="investors">
  <div class="wrap">
  <div class="sec-head">
- <div class="sec-label">07 — Investors</div>
+ <div class="sec-label">07 - Investors</div>
  <h2 class="sec-title">Investor <em>information.</em></h2>
  <p class="sec-sub">Regulatory disclosures, company documents, and shareholder resources. Each section opens a dedicated page.</p>
  <p class="sec-sub" style="margin-top:14px;font-size:14px;">The below information is disclosed in accordance with AIM Rule 26.</p>
@@ -4781,7 +4786,7 @@
 <section id="faq">
  <div class="wrap">
  <div class="sec-head">
- <div class="sec-label">08 — FAQ</div>
+ <div class="sec-label">08 - FAQ</div>
  <h2 class="sec-title">Common <em>questions.</em></h2>
  <p class="sec-sub">Answers to the questions we hear most often from prospective shareholders. Tap any question to expand its answer.</p>
  </div>
@@ -4936,7 +4941,7 @@
 <section id="contact">
  <div class="wrap">
  <div class="sec-head">
- <div class="sec-label">09 — Get in touch</div>
+ <div class="sec-label">09 - Get in touch</div>
  <h2 class="sec-title">Access the <em>AI supercycle.</em><br/>Get in touch.</h2>
  <p class="sec-sub">Shaires is actively sourcing primary and secondary exposure to the names above. If you are a company, early investor, employee, or fund with allocation in the frontier AI ecosystem, we would like to hear from you.</p>
  </div>
@@ -5462,7 +5467,7 @@
  <div class="ip-nsm-block" style="margin-top:32px; padding:24px 28px; border:1px solid color-mix(in oklab, var(--ink) 16%, transparent); border-radius:14px; background:color-mix(in oklab, var(--bg-2) 70%, transparent);">
  <p style="font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:0 0 10px;">Complete public record</p>
  <h3 style="font-family:'Fraunces', serif; font-weight:400; font-size:22px; letter-spacing:-0.02em; line-height:1.25; margin:0 0 8px; color:var(--ink);">Every regulated filing on the FCA NSM</h3>
- <p style="font-size:14.5px; line-height:1.55; color:var(--ink-2); margin:0 0 20px; max-width:62ch;">All UK-listed companies file their regulated documents with the FCA's National Storage Mechanism. The button below opens the official NSM record filtered to Shaires Holdings &mdash; every circular, annual report, prospectus and notice is listed in chronological order and updated automatically as new filings are submitted.</p>
+ <p style="font-size:14.5px; line-height:1.55; color:var(--ink-2); margin:0 0 20px; max-width:62ch;">All UK-listed companies file their regulated documents with the FCA's National Storage Mechanism. The button below opens the official NSM record filtered to Shaires Holdings: every circular, annual report, prospectus and notice is listed in chronological order and updated automatically as new filings are submitted.</p>
  <a href="https://data.fca.org.uk/#/nsm/nationalstoragemechanism?q=shaires+holdings" target="_blank" rel="noopener" class="ihb sm ihb-nsm" style="text-decoration:none;">
  <span class="ihb-idle">
  <span class="ihb-text">View all filings on the FCA NSM</span>
@@ -5866,7 +5871,7 @@
  <a class="pm-news-item" href="https://quoteddata.com/research/shaires-holdings-limited-a-listed-gateway-to-private-ai-qd/" target="_blank" rel="noopener">
  <span class="pm-news-type">Research</span>
  <span class="pm-news-meta">QuotedData</span>
- <span class="pm-news-title">Shaires Holdings Limited &mdash; A listed gateway to private AI</span>
+ <span class="pm-news-title">Shaires Holdings Limited - A listed gateway to private AI</span>
  <svg class="pm-news-arrow" viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
  </a>
  <a class="pm-news-item" href="https://www.globalcapital.com/article/2gran9uulyqkmvaikx14w/equity/shaires-launches-retail-offer-in-first-use-of-aims-new-capital-access-window" target="_blank" rel="noopener">
@@ -6092,7 +6097,7 @@
           <div class="check">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <h3>Thank you &mdash; <em>we&rsquo;ll be in touch shortly.</em></h3>
+          <h3>Thank you, <em>we&rsquo;ll be in touch shortly.</em></h3>
         </div>
       </div>
     </div>
@@ -6539,18 +6544,18 @@
       'cash':'Contributing cash to gain exposure'
     }
   };
-  const lbl = (group, value) => (LABELS[group] && LABELS[group][value]) || value || '—';
+  const lbl = (group, value) => (LABELS[group] && LABELS[group][value]) || value || '-';
 
   function buildEmailMessage(status){
     const isComplete = status === 'complete';
     const lines = [];
-    lines.push('SHAIRES — ' + (isComplete ? 'COMPLETED ACCESS REQUEST' : 'PARTIAL FORM PROGRESS'));
+    lines.push('SHAIRES - ' + (isComplete ? 'COMPLETED ACCESS REQUEST' : 'PARTIAL FORM PROGRESS'));
     lines.push('Status: ' + (isComplete ? 'COMPLETED' : 'PARTIAL (contact captured, may continue)'));
     lines.push('═══════════════════════════════════════');
     lines.push('');
     lines.push('CONTACT');
     lines.push('  Name:   ' + (data.firstName + ' ' + data.lastName).trim());
-    lines.push('  Email:  ' + (data.email || '—'));
+    lines.push('  Email:  ' + (data.email || '-'));
     if (data.phone) lines.push('  Phone:  ' + data.phone);
     lines.push('  Privacy policy: ' + (data.privacyAgreed ? 'Agreed' : 'Not agreed'));
     lines.push('');
@@ -6576,7 +6581,7 @@
     const isComplete = status === 'complete';
     return {
       access_key: WEB3FORMS_KEY,
-      subject:    (isComplete ? 'Shaires — Access Request COMPLETED from ' : 'Shaires — Partial form progress from ') + name,
+      subject:    (isComplete ? 'Shaires - Access Request COMPLETED from ' : 'Shaires - Partial form progress from ') + name,
       from_name:  name,
       email:      data.email || '',
       message:    buildEmailMessage(status),
@@ -6829,7 +6834,7 @@
     // Track which section is in view and mark the matching pill active
     const links = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
     const sections = links
-      .map(a => document.querySelector(a.getAttribute('href')))
+      .map(a => { try { return document.querySelector(a.getAttribute('href')); } catch(e){ return null; } })
       .filter(Boolean);
 
     if ('IntersectionObserver' in window && sections.length){
