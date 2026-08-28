@@ -940,7 +940,7 @@ nav.top.scrolled .nav-links{
 .pm-news-item:hover .pm-news-arrow{ stroke:var(--accent); transform:translate(2px,-2px) }
 .pm-news-fine{
   margin:16px 0 0; color:var(--muted);
-  font-size:12px; line-height:1.55; max-width:78ch;
+  font-size:12px; line-height:1.55;
 }
 @media (max-width:600px){
   .pm-news-item{ grid-template-columns:minmax(0,1fr) 20px; column-gap:14px; row-gap:4px; padding:14px 0 }

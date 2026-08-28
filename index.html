@@ -1840,7 +1840,7 @@
   .pm-news-arrow{ grid-column:3; grid-row:1 / span 2; align-self:center; justify-self:end; width:15px; height:15px; stroke:var(--muted); fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; transition:stroke .2s ease, transform .2s ease }
   .pm-news-item:hover .pm-news-title{ color:var(--accent) }
   .pm-news-item:hover .pm-news-arrow{ stroke:var(--accent); transform:translate(2px,-2px) }
-  .pm-news-fine{ margin:16px 0 0; color:var(--muted); font-size:12px; line-height:1.55; max-width:78ch }
+  .pm-news-fine{ margin:16px 0 0; color:var(--muted); font-size:12px; line-height:1.55 }
   @media (max-width:600px){
     .pm-news-item{ grid-template-columns:minmax(0,1fr) 20px; column-gap:14px; row-gap:4px; padding:14px 0 }
     .pm-news-type{ grid-column:1; grid-row:1; align-self:start }
@@ -4014,6 +4014,28 @@
  <button type="button" class="disclaimer-btn decline" id="disclaimerDecline">Decline</button>
  <button type="button" class="disclaimer-btn accept" id="disclaimerAccept">Accept</button>
  </div>
+ </div>
+</div>
+
+<!-- Geo-restriction block: shown in place of the disclaimer if the visitor's
+     IP resolves to a restricted jurisdiction (US, CA, JP, AU, ZA, IE). -->
+<div class="geo-block" id="geoBlock" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="geoBlockTitle">
+ <div class="geo-block-inner">
+ <p class="geo-block-eyebrow">Access restricted</p>
+ <h1 class="geo-block-title" id="geoBlockTitle">Access denied</h1>
+ <p class="geo-block-text">Our systems have flagged your connection as originating from a jurisdiction from which access to this website is restricted: the United States, Canada, Japan, Australia, South Africa or the Republic of Ireland. On this basis, access has been denied.</p>
+ <p class="geo-block-sub" data-geo-detected></p>
+ <div class="geo-block-actions">
+ <div class="geo-pass" id="geoPass">
+ <input type="password" class="geo-pass-input" id="geoPassInput" placeholder="Enter access code" aria-label="Access code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
+ <button type="button" class="geo-pass-submit" id="geoPassSubmit" aria-label="Submit override password">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+ </button>
+ </div>
+ <p class="geo-pass-error" id="geoPassError" hidden>Incorrect code. Please try again.</p>
+ <button type="button" class="geo-block-btn review" id="geoReview">Review terms again</button>
+ </div>
+ <p class="geo-block-fine">Entering a valid access code confirms that you are not located in, resident in, or accessing this website from any of the jurisdictions listed above, or that you are otherwise permitted under applicable law and regulation to access this website. Selecting &ldquo;Review terms again&rdquo; will return you to the disclaimer.</p>
  </div>
 </div>
 
@@ -6360,7 +6382,10 @@
           // loader or while the disclaimer is still showing — do nothing, so the
           // disclaimer always comes first and the Accept handler is what routes
           // a restricted visitor to the access-code warning.
-          /* geo gate removed — no action on IP result */
+          var passed = false;
+          try { passed = sessionStorage.getItem(KEY) === '1'; } catch(e){}
+          if (!passed) return;
+          openGeoBlock(res.code);
         });
       }
     }
@@ -6381,9 +6406,15 @@
 
     accept.addEventListener('click', () => {
       const g = window.__shairesGeo;
-      // Geo gate removed 24 Aug 2026: the disclaimer alone governs access.
-        // Restricted-jurisdiction wording is set out in the disclaimer text and
-        // the visitor accepts or declines it.
+      const blocked = !!(g && g.result && g.result.status === 'restricted' && !g.overridden);
+      if (blocked){
+        // Restricted visitors cannot bypass the geo-block via the disclaimer.
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('disclaimer-open');
+        openGeoBlock(g.result.code);
+        return;
+      }
       try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
       document.documentElement.classList.remove('geo-restricted');
       modal.classList.remove('is-open');
@@ -6843,6 +6874,10 @@
       // first section) we clear every active class so no nav pill lights up.
       const visible = new Set();
       const apply = () => {
+        // While a hash-routed sub-page (#inv/... or #privacy) is open the main
+        // sections are hidden, so every observer update would wrongly clear the
+        // route-based highlight set by applyRoute. Leave it alone.
+        if (document.body.classList.contains('viewing-subpage')) return;
         if (!visible.size){
           links.forEach(a => a.classList.remove('active'));
           return;
@@ -7479,6 +7514,9 @@
           // activated sub-page is guaranteed visible.
           target.classList.remove('reveal');
           target.classList.add('is-in-view');
+          // Highlight the matching nav pill: Media for the news page,
+          // Investors for every other investor sub-page.
+          setNavActive(slug === 'presentations-media' ? '#inv/presentations-media' : '#investors');
           // jump to top so the sub-page starts at its own hero
           window.scrollTo({ top: 0, behavior: 'auto' });
           return;
@@ -7500,11 +7538,24 @@
       const wasSubpage = document.body.classList.contains('viewing-subpage');
       document.body.classList.remove('viewing-subpage');
       pages.forEach(p => p.classList.remove('active'));
-      // If we just came back to #investors, let the browser scroll to it
-      if (wasSubpage && hash === 'investors') {
-        const inv = document.getElementById('investors');
-        if (inv) inv.scrollIntoView({ behavior: 'auto', block: 'start' });
+      setNavActive(null); // the scrollspy takes over again on the main page
+      // Coming back from a sub-page the browser could not scroll to the
+      // anchor (its section was display:none at navigation time), so land
+      // on the requested section ourselves once the main page is visible.
+      if (wasSubpage && hash && /^[\w-]+$/.test(hash)) {
+        const sec = document.getElementById(hash);
+        if (sec) requestAnimationFrame(function(){
+          sec.scrollIntoView({ behavior: 'auto', block: 'start' });
+        });
       }
+    }
+
+    // Toggle .active on the top nav pills from the router. null = clear all
+    // (the scroll-position observer then owns the highlight again).
+    function setNavActive(href){
+      document.querySelectorAll('.nav-links a').forEach(function(a){
+        a.classList.toggle('active', !!href && a.getAttribute('href') === href);
+      });
     }
 
     window.addEventListener('hashchange', applyRoute);
