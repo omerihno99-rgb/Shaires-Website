@@ -3974,7 +3974,10 @@
       };
 
       // Try providers in order; first confident ISO2 code wins.
-      var providers = [
+      // Geo lookups disabled 8 Sep 2026 along with the gate: no third-party
+      // IP calls are made; the result resolves as 'unknown' immediately.
+      var providers = [];
+      var _unusedProviders = [
         function(){ return lookup('https://api.country.is/', function(t){ return JSON.parse(t).country; }); },
         function(){ return lookup('https://get.geojs.io/v1/ip/country.json', function(t){ return JSON.parse(t).country; }); },
         function(){ return lookup('https://ipapi.co/country/', function(t){ return t; }); },
@@ -4030,27 +4033,7 @@
  </div>
 </div>
 
-<!-- Geo-restriction block: shown in place of the disclaimer if the visitor's
-     IP resolves to a restricted jurisdiction (US, CA, JP, AU, ZA, IE). -->
-<div class="geo-block" id="geoBlock" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="geoBlockTitle">
- <div class="geo-block-inner">
- <p class="geo-block-eyebrow">Access restricted</p>
- <h1 class="geo-block-title" id="geoBlockTitle">Access denied</h1>
- <p class="geo-block-text">Our systems have flagged your connection as originating from a jurisdiction from which access to this website is restricted: the United States, Canada, Japan, Australia, South Africa or the Republic of Ireland. On this basis, access has been denied.</p>
- <p class="geo-block-sub" data-geo-detected></p>
- <div class="geo-block-actions">
- <div class="geo-pass" id="geoPass">
- <input type="password" class="geo-pass-input" id="geoPassInput" placeholder="Enter access code" aria-label="Access code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" />
- <button type="button" class="geo-pass-submit" id="geoPassSubmit" aria-label="Submit override password">
- <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
- </button>
- </div>
- <p class="geo-pass-error" id="geoPassError" hidden>Incorrect code. Please try again.</p>
- <button type="button" class="geo-block-btn review" id="geoReview">Review terms again</button>
- </div>
- <p class="geo-block-fine">Entering a valid access code confirms that you are not located in, resident in, or accessing this website from any of the jurisdictions listed above, or that you are otherwise permitted under applicable law and regulation to access this website. Selecting &ldquo;Review terms again&rdquo; will return you to the disclaimer.</p>
- </div>
-</div>
+<!-- Geo gate removed 8 Sep 2026 on instruction: the disclaimer alone governs access. -->
 
 <nav class="top">
  <div class="wrap nav-inner">
@@ -6444,10 +6427,7 @@
           // loader or while the disclaimer is still showing — do nothing, so the
           // disclaimer always comes first and the Accept handler is what routes
           // a restricted visitor to the access-code warning.
-          var passed = false;
-          try { passed = sessionStorage.getItem(KEY) === '1'; } catch(e){}
-          if (!passed) return;
-          openGeoBlock(res.code);
+          /* geo gate removed: no action on IP result */
         });
       }
     }
@@ -6467,16 +6447,8 @@
     }
 
     accept.addEventListener('click', () => {
-      const g = window.__shairesGeo;
-      const blocked = !!(g && g.result && g.result.status === 'restricted' && !g.overridden);
-      if (blocked){
-        // Restricted visitors cannot bypass the geo-block via the disclaimer.
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('disclaimer-open');
-        openGeoBlock(g.result.code);
-        return;
-      }
+      // Geo gate removed 8 Sep 2026: accepting the disclaimer is the only
+      // condition of access, for every jurisdiction.
       try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
       document.documentElement.classList.remove('geo-restricted');
       modal.classList.remove('is-open');
