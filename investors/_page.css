@@ -60,6 +60,15 @@ nav.top.scrolled{
   color:var(--ink);
 }
 .brand em{ font-style:normal; font-weight:400; color:var(--accent) }
+/* Wordmark is the official logo as inline SVG (traced from the master
+   artwork) so it renders identically on every device and size. It is
+   sized relative to the surrounding font-size, so the existing breakpoint
+   font-size rules keep working. Ink paths use currentColor; the "ai" and
+   dot use --accent. */
+.brand svg.brand-mark, .boot-brand-mark svg.brand-mark{ display:block; height:.7727em; width:auto; overflow:visible }
+.brand, .boot-brand-mark{ align-items:center; min-height:1em }
+.wm-accent{ fill:var(--accent) }
+a.brand:hover svg.brand-mark{ color:var(--accent) }
 .brand .brand-dot{ color:var(--accent) }
 
 .nav-links{
