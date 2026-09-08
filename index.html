@@ -6684,6 +6684,43 @@
       phone:                    data.phone
     };
   }
+  // ---- HubSpot CRM (Forms API, no credentials in page) ----
+  // Portal 148708776 (Shaires Holdings). HUBSPOT_FORM is the GUID of the
+  // "Website - Request access" form in HubSpot; submissions create/update
+  // the contact and trigger the form's follow-up email.
+  const HUBSPOT_PORTAL = '148708776';
+  const HUBSPOT_FORM   = '4ac425c8-5310-4bf3-8498-88c5ccfbdbf6'; // Website - Request access
+  function sendToHubSpot(){
+    if (!/^[0-9a-f-]{36}$/i.test(HUBSPOT_FORM)) return; // not wired yet
+    const profile = [
+      data.engage  ? 'Engages with private tech as: ' + lbl('engage',  data.engage)  : '',
+      data.holds   ? 'Holds late-stage private tech: '  + lbl('holds',   data.holds)   : '',
+      data.outcome ? 'Most compelling outcome: '        + lbl('outcome', data.outcome) : ''
+    ].filter(Boolean).join('\n');
+    const body = {
+      submittedAt: Date.now(),
+      fields: [
+        { name: 'firstname', value: data.firstName || '' },
+        { name: 'lastname',  value: data.lastName  || '' },
+        { name: 'email',     value: data.email     || '' },
+        { name: 'phone',     value: data.phone     || '' },
+        { name: 'message',   value: profile }
+      ],
+      context: { pageUri: location.href.split('#')[0], pageName: 'shaires-holdings.com - Request access' },
+      legalConsentOptions: { consent: {
+        consentToProcess: !!data.privacyAgreed,
+        text: 'I agree to the Shaires Holdings privacy policy.',
+        communications: []
+      } }
+    };
+    try {
+      fetch('https://api-eu1.hsforms.com/submissions/v3/integration/submit/' + HUBSPOT_PORTAL + '/' + HUBSPOT_FORM, { // EU data-residency portal
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body), keepalive: true
+      }).catch(function(){});
+    } catch (e) {}
+  }
+
   function sendSnapshot(status, onSuccess, onError){
     const hash = JSON.stringify(data) + '|' + status;
     const now  = Date.now();
@@ -6695,6 +6732,10 @@
     const payload = buildPayload(status);
     const fd = new FormData();
     Object.entries(payload).forEach(([k, v]) => fd.append(k, v == null ? '' : String(v)));
+
+    // COMPLETED requests are also written straight into the Shaires HubSpot
+    // CRM (fire-and-forget, independent of the email relay above).
+    if (status === 'complete') sendToHubSpot();
 
     fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
       .then(async (r) => {
