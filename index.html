@@ -6868,8 +6868,8 @@
       btn.classList.add('is-filling');
       setTimeout(() => {
         openModal();
-        setTimeout(() => btn.classList.remove('is-filling'), 450);
-      }, 430);
+        setTimeout(() => btn.classList.remove('is-filling'), 350);
+      }, 200);
     });
   });
 
@@ -6906,7 +6906,7 @@
     el.addEventListener('click', () => {
       // The Request-access pill plays its fill animation first on touch
       // devices, so hold the drawer open until the form has popped up.
-      const hold = (el.hasAttribute('data-open-access') && window.matchMedia('(hover:none)').matches) ? 470 : 0;
+      const hold = (el.hasAttribute('data-open-access') && window.matchMedia('(hover:none)').matches) ? 230 : 0;
       setTimeout(() => setOpen(false), hold);
     });
   });
@@ -8479,16 +8479,23 @@ function shairesInitHero(){
   .nav-inner .ihb.is-filling .ihb-dot, .nav-inner .ihb.is-filling:active .ihb-dot,
   .hero-row .ihb.is-filling .ihb-dot, .hero-row .ihb.is-filling:active .ihb-dot{
     transform:scale(120); background:var(--accent);
+    transition:transform .28s cubic-bezier(.4, 0, .2, 1);
   }
   .ihb.is-filling .ihb-text, .ihb.is-filling:active .ihb-text,
   .nav-inner .ihb.is-filling .ihb-text, .nav-inner .ihb.is-filling:active .ihb-text,
   .hero-row .ihb.is-filling .ihb-text, .hero-row .ihb.is-filling:active .ihb-text{
     transform:translateX(80px); opacity:1; color:transparent;
+    transition:transform .28s cubic-bezier(.4, 0, .2, 1), color .15s ease;
   }
   .ihb.is-filling .ihb-hover, .ihb.is-filling:active .ihb-hover,
   .nav-inner .ihb.is-filling .ihb-hover, .nav-inner .ihb.is-filling:active .ihb-hover,
   .hero-row .ihb.is-filling .ihb-hover, .hero-row .ihb.is-filling:active .ihb-hover{
     transform:translateX(0); opacity:1;
+    transition:transform .28s cubic-bezier(.4, 0, .2, 1), opacity .2s ease;
+  }
+  /* Faster card entrance on phones so the form appears right after the fill */
+  @media (max-width:600px){
+    .access-card{ animation-duration:.22s }
   }
 }
 </style>
