@@ -2351,14 +2351,12 @@
   body.access-open{ overflow:hidden }
 
   @media (max-width:600px){
-    .access-modal{ padding:0 }
+    .access-modal{ padding:16px }
     .access-card{
-      max-height:100vh; min-height:100vh;
-      border-radius:0; border:none;
+      max-height:calc(100vh - 32px);
       padding:32px 22px 22px;
     }
     .access-twocol{ grid-template-columns:1fr }
-    .access-step{ }
   }
 
   /* Disclaimer modal, first-load gate */
@@ -2773,10 +2771,9 @@
   @media (max-width:600px){
     .access-card{
       padding:26px 18px 18px;
-      /* Use dynamic viewport units so the card never gets clipped by the
+      /* Dynamic viewport units so the card never gets clipped by the
          iOS address bar collapsing/expanding mid-scroll. */
-      min-height:100dvh;
-      max-height:100dvh;
+      max-height:calc(100dvh - 32px);
     }
     .access-eyebrow{ margin:0 0 14px; font-size:10px }
     .access-progress{ margin-bottom:18px }
@@ -3550,32 +3547,30 @@
     .ihb .ihb-text, .ihb-hover span{ font-size:12.5px }
   }
 
-  /* ---------- Access modal: lock full-screen coverage on phones ----------
-     The earlier (max-width:760px) block sets border-radius and max-height
-     that leave the dark overlay visible around the card on narrow viewports.
-     This block runs last so its rules win in the cascade. */
+  /* ---------- Access modal on phones: bordered pop-up, not full bleed ----------
+     The card floats over a blurred backdrop with a margin on every side,
+     keeps its ink border and rounded corners, and never exceeds the
+     viewport (safe-area aware). This block runs last so its rules win. */
   @media (max-width:600px){
-    .access-modal{ padding:0 }
+    .access-modal{
+      padding:
+        calc(env(safe-area-inset-top, 0px) + 16px)
+        calc(env(safe-area-inset-right, 0px) + 16px)
+        calc(env(safe-area-inset-bottom, 0px) + 16px)
+        calc(env(safe-area-inset-left, 0px) + 16px);
+    }
     .access-card{
       width:100%;
       max-width:none;
-      min-height:100vh;
-      max-height:100vh;
-      min-height:100dvh;
-      max-height:100dvh;
-      border-radius:0;
-      border:none;
-      box-shadow:none;
-      padding:
-        calc(env(safe-area-inset-top, 0px) + 28px)
-        calc(env(safe-area-inset-right, 0px) + 22px)
-        calc(env(safe-area-inset-bottom, 0px) + 20px)
-        calc(env(safe-area-inset-left, 0px) + 22px);
+      min-height:0;
+      max-height:calc(100vh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      max-height:calc(100dvh - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      border:1px solid var(--ink);
+      border-radius:20px;
+      box-shadow:0 30px 80px -20px rgba(17,19,17,.35);
+      padding:30px 20px 20px;
     }
-    .access-close{
-      top:calc(env(safe-area-inset-top, 0px) + 14px);
-      right:calc(env(safe-area-inset-right, 0px) + 14px);
-    }
+    .access-close{ top:14px; right:14px }
   }
 
   /* ---------- Investor sub-page button row: compact, equal-size pills on phones ----------
@@ -6863,8 +6858,19 @@
     if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
   });
   modal.querySelectorAll('[data-access-close]').forEach(el => el.addEventListener('click', closeModal));
+  // On touch devices the pill replays its fill animation (.is-filling)
+  // before the form pops up; desktop opens immediately as before.
+  const touchUI = window.matchMedia('(hover:none)').matches;
   document.querySelectorAll('[data-open-access]').forEach(btn => {
-    btn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!touchUI || btn.classList.contains('is-filling')) { openModal(); return; }
+      btn.classList.add('is-filling');
+      setTimeout(() => {
+        openModal();
+        setTimeout(() => btn.classList.remove('is-filling'), 450);
+      }, 430);
+    });
   });
 
   showStep(0);
@@ -6898,7 +6904,10 @@
   // the "drawer doesn't reopen" race on iOS.
   drawer.querySelectorAll('[data-nav-link]').forEach(el => {
     el.addEventListener('click', () => {
-      setTimeout(() => setOpen(false), 0);
+      // The Request-access pill plays its fill animation first on touch
+      // devices, so hold the drawer open until the form has popped up.
+      const hold = (el.hasAttribute('data-open-access') && window.matchMedia('(hover:none)').matches) ? 470 : 0;
+      setTimeout(() => setOpen(false), hold);
     });
   });
 
@@ -8439,6 +8448,48 @@ function shairesInitHero(){
   .hero-row .ihb:active .ihb-idle{ color:var(--bg) }
   .hero-row .ihb:active .ihb-text{ color:var(--bg); background:transparent }
   .hero-row .ihb:active .ihb-dot{ background:var(--accent) }
+
+  /* Request-access pills, tap-to-fill. JS adds .is-filling on tap so the
+     pill replays the desktop dot-fill + label slide before the form pops
+     up. Desktop hover behaviour is untouched (this block is touch-only). */
+  .ihb[data-open-access]:active,
+  .nav-inner .ihb[data-open-access]:active,
+  .hero-row .ihb[data-open-access]:active{
+    background:var(--bg); color:var(--ink); border-color:var(--ink); transform:none;
+  }
+  .ihb[data-open-access]:active .ihb-idle,
+  .ihb[data-open-access]:active .ihb-text,
+  .nav-inner .ihb[data-open-access]:active .ihb-idle,
+  .nav-inner .ihb[data-open-access]:active .ihb-text,
+  .hero-row .ihb[data-open-access]:active .ihb-idle,
+  .hero-row .ihb[data-open-access]:active .ihb-text{ color:var(--ink) }
+  .cta .ihb.ghost[data-open-access]:active{
+    background:transparent; color:var(--bg); border-color:var(--bg);
+  }
+  .cta .ihb.ghost[data-open-access]:active .ihb-idle,
+  .cta .ihb.ghost[data-open-access]:active .ihb-text{ color:var(--bg) }
+  .cta .ihb.ghost[data-open-access]:active .ihb-dot{ background:var(--accent) }
+
+  .nav-inner .ihb.is-filling .ihb-hover,
+  .hero-row .ihb.is-filling .ihb-hover{ display:inline-flex }
+  .ihb.is-filling, .ihb.is-filling:active,
+  .nav-inner .ihb.is-filling:active,
+  .hero-row .ihb.is-filling:active{ border-color:var(--accent); transform:none }
+  .ihb.is-filling .ihb-dot, .ihb.is-filling:active .ihb-dot,
+  .nav-inner .ihb.is-filling .ihb-dot, .nav-inner .ihb.is-filling:active .ihb-dot,
+  .hero-row .ihb.is-filling .ihb-dot, .hero-row .ihb.is-filling:active .ihb-dot{
+    transform:scale(120); background:var(--accent);
+  }
+  .ihb.is-filling .ihb-text, .ihb.is-filling:active .ihb-text,
+  .nav-inner .ihb.is-filling .ihb-text, .nav-inner .ihb.is-filling:active .ihb-text,
+  .hero-row .ihb.is-filling .ihb-text, .hero-row .ihb.is-filling:active .ihb-text{
+    transform:translateX(80px); opacity:1; color:transparent;
+  }
+  .ihb.is-filling .ihb-hover, .ihb.is-filling:active .ihb-hover,
+  .nav-inner .ihb.is-filling .ihb-hover, .nav-inner .ihb.is-filling:active .ihb-hover,
+  .hero-row .ihb.is-filling .ihb-hover, .hero-row .ihb.is-filling:active .ihb-hover{
+    transform:translateX(0); opacity:1;
+  }
 }
 </style>
 </body>
