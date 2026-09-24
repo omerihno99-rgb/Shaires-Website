@@ -3179,6 +3179,9 @@
     margin:18px 0 24px;
   }
   .ip-twocol .ip-info-card{ margin:0; height:100% }
+  /* same rhythm as the two-column block, for a lone card */
+  .ip-onecol{ display:grid; grid-template-columns:1fr; margin:18px 0 24px }
+  .ip-onecol .ip-info-card{ margin:0 }
   .ip-info-list{
     list-style:none; padding:0; margin:10px 0 0;
     display:flex; flex-direction:column; gap:8px;
@@ -4257,6 +4260,20 @@
     .film-ctrl{ width:44px; height:44px }
     .film-runtime{ display:none }
   }
+  /* Touch: a tap leaves a sticky :hover on the frame, which kept the pause
+     mark on screen for the rest of the film. With no hover to rely on, the
+     mark retires by itself while the film runs and the player's own controls
+     take over; it returns whenever the film is paused. */
+  @media (hover:none){
+    .film-frame:hover .film-ctrl{ scale:1 }
+    .film-frame.is-playing:hover .film-ctrl,
+    .film-frame.is-playing .film-ctrl:hover,
+    .film-frame.is-playing .film-ctrl:focus,
+    .film-frame.is-playing .film-ctrl:focus-visible{ opacity:0; pointer-events:none }
+    .film-frame.is-playing.is-paused .film-ctrl,
+    .film-frame.is-playing.is-paused .film-ctrl:focus{ opacity:1; pointer-events:auto }
+  }
+
   /* ---- broker card charts: abstract, no real data ---- */
   .fb-chart{ display:block; width:100%; height:92px; margin:2px 0 4px }
   .fb-chart svg{ width:100%; height:100%; display:block; overflow:visible }
@@ -4291,14 +4308,13 @@
     .fbc-line{ animation:none; stroke-dashoffset:0 }
     }
 
-  /* ---- bento layout: video / factsheet / brokers ---- */
+  /* ---- overview film: one centred frame ---- */
   .film-bento{
-    width:100%; max-width:1120px;
+    width:100%; max-width:1040px; margin:0 auto;
     display:grid; gap:16px;
-    grid-template-columns:repeat(6, 1fr);
-    grid-template-rows:auto auto;
+    grid-template-columns:1fr;
   }
-  .fb-video{ grid-column:1/5; grid-row:1;
+  .fb-video{
     border:1px solid rgba(17,19,17,.14); border-radius:20px;
     padding:14px 14px 0; background:var(--bg);
     display:flex; flex-direction:column;
@@ -4309,30 +4325,16 @@
     margin:0; padding:13px 6px 13px;
     font-size:13.5px; line-height:1.5; color:var(--muted); text-align:center;
   }
-  .fb-fact{ grid-column:5/7; grid-row:1;
-    border:1px solid rgba(17,19,17,.14); border-radius:20px;
-    background:var(--bg-2);
-    padding:20px;
-    display:flex; flex-direction:column; gap:14px;
-    text-decoration:none; color:var(--ink);
-    transition:border-color .18s ease;
-  }
-  /* hover highlights the document itself, not the card (as on Presentations & Media) */
   .fb-eyebrow{
     font-family:'JetBrains Mono',monospace; font-size:10.5px;
     letter-spacing:.2em; text-transform:uppercase; color:var(--muted);
   }
-  .fb-cover-wrap{ flex:1; min-height:0; display:flex; align-items:center; justify-content:center }
-  .fb-cover{ display:block; max-width:100%; max-height:330px; object-fit:contain;
-    border:1px solid rgba(17,19,17,.16); border-radius:6px;
-    transition:border-color .18s ease }
-  .fb-fact:hover .fb-cover{ border-color:var(--accent) }
   .fb-cta{
     display:inline-flex; align-items:center; gap:6px;
     font-family:'Fraunces',serif; font-style:italic; font-size:15.5px;
     color:var(--ink);
   }
-  .fb-fact:hover .fb-cta, .fb-broker:hover .fb-cta{ color:var(--accent) }
+  .fb-broker:hover .fb-cta{ color:var(--accent) }
   .fb-cta svg{ width:12px; height:12px; stroke:currentColor; fill:none;
     stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round }
   .fb-broker{ grid-row:2; grid-column:span 3;
@@ -4347,15 +4349,11 @@
   .fb-logo{ display:block; height:30px; width:auto }
   .fb-logo-hl{ height:38px }
   @media (max-width:900px){
-    .film-bento{ grid-template-columns:1fr 1fr }
-    .fb-video{ grid-column:1/3 }
-    .fb-fact{ grid-column:1/3; grid-row:2; min-height:340px }
     .fb-broker{ grid-row:3; grid-column:auto }
   }
   @media (max-width:600px){
-    .film-bento{ grid-template-columns:1fr 1fr; gap:12px }
-    .fb-video, .fb-fact{ grid-column:1/3 }
-    .fb-fact{ grid-row:auto; min-height:300px }
+    .film-bento{ gap:12px }
+    .fb-video{ padding:10px 10px 0 }
     .fb-broker{ grid-column:auto; grid-row:auto; padding:14px; min-height:0; gap:10px }
     .fb-chart{ height:56px }
     .fb-logo{ height:22px }
@@ -4374,7 +4372,7 @@
   <div class="wrap">
     <div class="sec-head film-reveal">
       <div class="sec-label">01 - Overview</div>
-      <h2 class="sec-title" id="filmTitle">Watch the <em>Overview.</em> Read the <em>facts.</em></h2>
+      <h2 class="sec-title" id="filmTitle">Watch the <em>Overview.</em></h2>
     </div>
 
     <div class="film-bento film-reveal">
@@ -4390,13 +4388,6 @@
         </div>
         <p class="fb-caption">Pure exposure to the AI supercycle. The thinking behind Shaires, in just over five minutes.</p>
       </div>
-
-      <a class="fb-fact" href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">
-        <span class="fb-eyebrow">Retail investor factsheet</span>
-        <span class="fb-cover-wrap"><img class="fb-cover" src="investors/docs/factsheet-cover.webp" alt="Retail investor factsheet cover" loading="lazy"></span>
-        <span class="fb-cta">Open the factsheet <svg viewBox="0 0 24 24"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></span>
-      </a>
-
 
     </div>
   </div>
@@ -4557,8 +4548,11 @@
     });
   }
 
+  var TOUCH = window.matchMedia('(hover:none)').matches;
   ctrl.addEventListener('click', function(e){
     e.stopPropagation();
+    /* on touch, keeping focus would hold the mark on screen */
+    if (TOUCH) try { ctrl.blur(); } catch(err){}
     if (!iframe){ start(); return; }
     if (frame.classList.contains('is-paused')) post('play'); else post('pause');
   });
@@ -5465,7 +5459,6 @@
  <tr><th>Date</th><th>Document</th><th class="doc-action">Action</th></tr>
  </thead>
  <tbody>
- <tr class="doc-gated" hidden><td class="doc-date">17/08/2026</td><td class="doc-title">Shaires - Retail Investor Factsheet</td><td class="doc-action"><a href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
  <tr><td class="doc-date">22/05/2026</td><td class="doc-title">Shaires, Circular re New Investing Policy &amp; Share Combination</td><td class="doc-action"><a href="investors/docs/2026-new-investing-policy-circular.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
  <tr><td class="doc-date">16/01/2026</td><td class="doc-title">Amended and Restated Memorandum of Association (2026 GM)</td><td class="doc-action"><a href="investors/docs/memorandum-2026-gm.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
  <tr><td class="doc-date">22/12/2025</td><td class="doc-title">Shaires, 2026 GM Circular (Zeus)</td><td class="doc-action"><a href="investors/docs/2026-gm-circular-zeus.pdf" target="_blank" rel="noopener">Download <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg></a></td></tr>
@@ -5892,15 +5885,7 @@
  <h1 class="ip-title">Presentations &amp; <em>Media.</em></h1>
  <p class="ip-lede">Company films, presentations and investor materials. New items are added to this page as they are published.</p>
 
- <div class="ip-twocol">
- <div class="ip-info-card">
- <p class="ip-info-card-label">Retail investor factsheet</p>
- <a class="pm-cover-link" href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener" aria-label="Open the retail investor factsheet (PDF)"><img class="pm-cover" src="investors/docs/factsheet-cover.webp" alt="Retail investor factsheet cover" loading="lazy"></a>
- <p>A concise introduction to Shaires for retail investors. Updated 17 August 2026.</p>
- <ul class="ip-info-list">
- <li><a href="investors/docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">Open the factsheet &rarr;</a></li>
- </ul>
- </div>
+ <div class="ip-onecol">
  <div class="ip-info-card">
  <p class="ip-info-card-label">Media enquiries</p>
  <p>Tavistock acts as financial PR adviser to Shaires. For press, interview and image requests:</p>
@@ -8329,8 +8314,11 @@ function shairesInitHero(){
       subscribe();
     });
   }
+  var TOUCH = window.matchMedia('(hover:none)').matches;
   ctrl.addEventListener('click', function(e){
     e.stopPropagation();
+    /* on touch, keeping focus would hold the mark on screen */
+    if (TOUCH) try { ctrl.blur(); } catch(err){}
     if (!iframe){ start(); return; }
     if (frame.classList.contains('is-paused')) post('play'); else post('pause');
   });
@@ -8385,12 +8373,6 @@ function shairesInitHero(){
 .cta .ihb-email:hover,
 .cta .ihb-email:active{ background:transparent; border-color:var(--accent); color:var(--accent); transform:none }
 
-/* Presentations & Media: factsheet cover preview */
-.pm-cover-link{ display:inline-block; line-height:0; margin:6px 0 14px }
-.pm-cover{ display:block; width:100%; max-width:240px;
-  border:1px solid rgba(17,19,17,.16); border-radius:10px;
-  transition:border-color .18s ease }
-.pm-cover-link:hover .pm-cover{ border-color:var(--accent) }
 
 /* Hero ticker line: sits under the display headline, above the canvas */
 .hero-ticker{

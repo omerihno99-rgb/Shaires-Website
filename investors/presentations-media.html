@@ -78,6 +78,20 @@
     transition: opacity 300ms cubic-bezier(.22,1,.36,1);
   }
   .film-frame.is-playing .film-runtime{ opacity:0 }
+  /* Touch: a tap leaves a sticky :hover on the frame, which kept the pause
+     mark on screen for the rest of the film. With no hover to rely on, the
+     mark retires by itself while the film runs and the player's own controls
+     take over; it returns whenever the film is paused. */
+  @media (hover:none){
+    .film-frame:hover .film-ctrl{ scale:1 }
+    .film-frame.is-playing:hover .film-ctrl,
+    .film-frame.is-playing .film-ctrl:hover,
+    .film-frame.is-playing .film-ctrl:focus,
+    .film-frame.is-playing .film-ctrl:focus-visible{ opacity:0; pointer-events:none }
+    .film-frame.is-playing.is-paused .film-ctrl,
+    .film-frame.is-playing.is-paused .film-ctrl:focus{ opacity:1; pointer-events:auto }
+  }
+
   @media (max-width:900px){ .film-frame{ border-radius:16px } .film-ctrl{ width:54px; height:54px } }
   @media (max-width:600px){ .film-frame{ border-radius:12px } .film-ctrl{ width:44px; height:44px } .film-runtime{ display:none } }
 </style>
@@ -131,15 +145,7 @@
     <h1 class="ip-title">Presentations &amp; <em>Media.</em></h1>
     <p class="ip-lede">Company films, presentations and investor materials. New items are added to this page as they are published.</p>
 
-    <div class="ip-twocol">
- <div class="ip-info-card">
- <p class="ip-info-card-label">Retail investor factsheet</p>
- <a class="pm-cover-link" href="docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener" aria-label="Open the retail investor factsheet (PDF)"><img class="pm-cover" src="docs/factsheet-cover.webp" alt="Retail investor factsheet cover" loading="lazy"></a>
- <p>A concise introduction to Shaires for retail investors. Updated 17 August 2026.</p>
- <ul class="ip-info-list">
- <li><a href="docs/2026-retail-investor-factsheet.pdf" target="_blank" rel="noopener">Open the factsheet &rarr;</a></li>
- </ul>
- </div>
+    <div class="ip-onecol">
  <div class="ip-info-card">
  <p class="ip-info-card-label">Media enquiries</p>
  <p>Tavistock acts as financial PR adviser to Shaires. For press, interview and image requests:</p>
@@ -292,8 +298,11 @@
       subscribe();
     });
   }
+  var TOUCH = window.matchMedia('(hover:none)').matches;
   ctrl.addEventListener('click', function(e){
     e.stopPropagation();
+    /* on touch, keeping focus would hold the mark on screen */
+    if (TOUCH) try { ctrl.blur(); } catch(err){}
     if (!iframe){ start(); return; }
     if (frame.classList.contains('is-paused')) post('play'); else post('pause');
   });
