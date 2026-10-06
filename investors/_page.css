@@ -896,6 +896,14 @@ nav.top.scrolled .nav-links{
 
 
 /* ---------- In the news (Presentations & Media) ---------- */
+/* Presentations & Media: investor deck card */
+.pm-deck{ display:grid; grid-template-columns:minmax(0,2fr) minmax(0,3fr); gap:18px 26px; align-items:center; margin:6px 0 2px }
+.pm-deck-link{ display:block; line-height:0 }
+.pm-deck-cover{ display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover;
+  border:1px solid rgba(17,19,17,.16); border-radius:10px; transition:border-color .18s ease }
+.pm-deck-link:hover .pm-deck-cover{ border-color:var(--accent) }
+.pm-deck-text p{ margin:0 }
+@media (max-width:760px){ .pm-deck{ grid-template-columns:1fr; gap:14px } }
 .pm-news{ margin:34px 0 4px }
 .pm-news-head{
   display:flex; align-items:baseline; justify-content:space-between;
